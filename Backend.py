@@ -10,7 +10,6 @@ species= sys.argv[2] if len(sys.argv) > 1 else "aves"
 protein = sys.argv[3] if len(sys.argv) > 1 else "glucose-6-phosphatase"
 #sp.call("sh -c '$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)'")
 
-
 with open(f"{user_id}pepresults.txt","w") as pepres:
     pepres.write("ID\tMolecularWeight\tResidueCount\tResidueWeight\tIsoelectricPoint\tExtinctionReduced\tExtinctionBridges\tReducedMgMl\tBridgeMgMl\tProbability(+/-)\n")
 with open(f"{user_id}results.fasta","w") as fasta:
@@ -25,16 +24,19 @@ with open(f"{user_id}alignment.fasta","w") as align:
 #protein=input("What protein or protein family?\n")
 fastlist = []
 search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
-
 try:
-    sp.call(search,shell=True)
-except:
-    print("An Error Occured.")   
+    sp.call(search,shell=True,check=True,stout=sp.PIPE,stderr=sp.PIPE)
+    print("worked")
+    #with open(f"{user_id}results.fasta", "w") as fasta_file:
+        #fasta_file.write(result.stdout.decode('utf-8'))
+except sp.CalledProcessError as e:
+    print("An Error Occured.")
+    print(e.stderr.decode('utf-8'))
     #species=input("What organism group??\n")
     #protein=input("What protein or protein family?\n")
     #search="esearch -db protein -query \"\'"+species+"\'*[Organism] AND \'"+protein+"\'*[Protein]\"| efetch -format fasta >> results.fasta"
 
-
+#Unsure why its not finding any results???
 count=0
 with open(f"{user_id}results.fasta","r") as fasta:
     for line in fasta:
@@ -43,15 +45,17 @@ with open(f"{user_id}results.fasta","r") as fasta:
             count +=1
             i=str(re.findall(">\w*",line))
             fastlist.append(i[3:-2])
+
 if count==0:
+    print(search)
     print("Error: 0 Proteins found. Please try again.")
     exit()
 else:
     print(str(count)+" proteins found.")
     with open(f"{user_id}results.tsv","w") as tabdata:
         tabdata.write("")
-    search=f"esearch -db gene -query \"\'{species}\'[Organism] AND \'{protein}\*'[Protein]\"| efetch -format tabular >> {user_id}results.tsv"
-  
+    search=f"esearch -db gene -query \"\'{species}\'[Organism] AND \'{protein}\*\'[Protein]\"| efetch -format tabular >> {user_id}results.tsv"
+ 
     sp.call(search,shell=True)   
     sp.call(f"plotcon -sequences {user_id}results.fasta -winsize 10 -graph png",shell=True)
     sp.call(f"mv plotcon.1.png {user_id}plotcon.png",shell=True)
@@ -99,7 +103,7 @@ else:
             if os.path.exists(f"{user_id}{record.id}.tsv"):
                 with open(f"{user_id}{record.id}.tsv","r") as add:
                     motifres=add.readlines()[1:]
-                with open("{user_id}resultsprosite.tsv","a") as result:
+                with open(f"{user_id}resultsprosite.tsv","a") as result:
                     result.writelines(motifres)        
                 os.remove(f"{user_id}{record.id}.tsv")
 
