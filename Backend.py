@@ -1,15 +1,17 @@
 #!/bin/python3
 import time
-import sys,os,re,matplotlib,numpy,requests
+import sys,os,re,numpy,requests
 import subprocess as sp
 from Bio import SeqIO
-fastlist = []
+from Bio import Entrez
 s=[]
 user_id = sys.argv[1] if len(sys.argv) > 1 else "unknown"
 species= sys.argv[2] if len(sys.argv) > 1 else "aves"
 protein = sys.argv[3] if len(sys.argv) > 1 else "glucose-6-phosphatase"
-#sp.call("sh -c '$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)'")
-
+#sp.call("sh -c '$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)'",shell=True)
+#sp.call("export PATH=${HOME}/edirect:${PATH}",shell=True)
+#sp.call("sh -c \"curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh\"")
+protein_ids=[]
 with open(f"{user_id}pepresults.txt","w") as pepres:
     pepres.write("ID\tMolecularWeight\tResidueCount\tResidueWeight\tIsoelectricPoint\tExtinctionReduced\tExtinctionBridges\tReducedMgMl\tBridgeMgMl\tProbability(+/-)\n")
 with open(f"{user_id}results.fasta","w") as fasta:
@@ -18,48 +20,73 @@ with open(f"{user_id}resultsprosite.tsv","w") as proresults:
     proresults.write("SeqName\tStart\tEnd\tScore\tStrahd\tMotif\n")
 with open(f"{user_id}alignment.fasta","w") as align:
     align.write("")
-
 #PROSITE_URL = "https://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi"
 #species=input("What organism group??\n")
 #protein=input("What protein or protein family?\n")
-fastlist = []
-search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
-try:
-    sp.call(search,shell=True,check=True,stout=sp.PIPE,stderr=sp.PIPE)
-    print("worked")
+#search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
+Entrez.email="s2761220@ed.ac.uk"
+search_handle = Entrez.esearch(db="protein", term=f"{species}[Organism] AND {protein}[Protein]", retmax=10)
+search_results = Entrez.read(search_handle)
+search_handle.close()
+protein_ids = search_results['IdList']
+if protein_ids:
+    # Fetch the sequences for the found protein IDs
+    fetch_handle = Entrez.efetch(db="protein", id=protein_ids, rettype="fasta", retmode="text")
+    fasta_data = fetch_handle.read()
+    fetch_handle.close()
+    file_name = f"{user_id}results.fasta"
+    with open(file_name, "w") as fasta_file:
+        fasta_file.write(fasta_data)
+#result = sp.run(search, shell=True, check=True, stdout=sp.PIPE, stderr=sp.PIPE)
+#if result.returncode == 0:
+#    print("ok")
+    # Handle successful command
+   # with open(f"{user_id}results.fasta", "w") as fasta_file:
+   #print(result.stdout.decode('utf-8'))
+#else:
+#    print(f"An error occurred: {result.stderr.decode('utf-8')}")
+#    exit()
+#try:
+    #sp.call(search,shell=True)
+#    print("worked")
     #with open(f"{user_id}results.fasta", "w") as fasta_file:
         #fasta_file.write(result.stdout.decode('utf-8'))
-except sp.CalledProcessError as e:
-    print("An Error Occured.")
-    print(e.stderr.decode('utf-8'))
+#except sp.CalledProcessError as e:
+ #   print("An Error Occured.")
+  #  print(e.stderr.decode('utf-8'))
     #species=input("What organism group??\n")
     #protein=input("What protein or protein family?\n")
     #search="esearch -db protein -query \"\'"+species+"\'*[Organism] AND \'"+protein+"\'*[Protein]\"| efetch -format fasta >> results.fasta"
 
 #Unsure why its not finding any results???
-count=0
-with open(f"{user_id}results.fasta","r") as fasta:
-    for line in fasta:
-        if re.findall(".*>.*",line):
-            line=line.upper().rstrip("\n")
-            count +=1
-            i=str(re.findall(">\w*",line))
-            fastlist.append(i[3:-2])
+#count=0
+#with open(f"{user_id}results.fasta","r") as fasta:
+#    for line in fasta:
+#        if re.findall(".*>.*",line):
+#            line=line.upper().rstrip("\n")
+#            count +=1
+#            i=str(re.findall(">\w*",line))
+#            fastlist.append(i[3:-2])
+#if count==0:
+#    print(search)
+#    print("Error: 0 Proteins found. Please try again.")
+#    exit()
+    print(str(len(protein_ids))+" proteins found.")
+    #with open(f"{user_id}results.tsv","w") as tabdata:
+    #    tabdata.write("")
+    #search=f"esearch -db gene -query \"\'{species}\'[Organism] AND \'{protein}\*\'[Protein]\"| efetch -format tabular >> {user_id}results.tsv"
+    #sp.call(search,shell=True)   
+    fetch_handle = Entrez.efetch(db="protein", id=protein_ids, rettype="tsv", retmode="text")
+    tsv_data = fetch_handle.read()
+    fetch_handle.close()
+    file_name = f"{user_id}results.tsv"
+    with open(file_name, "w") as tsv_file:
+        tsv_file.write(tsv_data)
 
-if count==0:
-    print(search)
-    print("Error: 0 Proteins found. Please try again.")
-    exit()
-else:
-    print(str(count)+" proteins found.")
-    with open(f"{user_id}results.tsv","w") as tabdata:
-        tabdata.write("")
-    search=f"esearch -db gene -query \"\'{species}\'[Organism] AND \'{protein}\*\'[Protein]\"| efetch -format tabular >> {user_id}results.tsv"
- 
-    sp.call(search,shell=True)   
     sp.call(f"plotcon -sequences {user_id}results.fasta -winsize 10 -graph png",shell=True)
-    sp.call(f"mv plotcon.1.png {user_id}plotcon.png",shell=True)
+    sp.call(f"cp plotcon.1.png {user_id}.plotcon.png",shell=True)
     sp.call(f"pepstats {user_id}results.fasta -outfile {user_id}pepstats.txt",shell=True)
+   
     with open(f"{user_id}pepstats.txt","r") as pep:
         with open(f"{user_id}pepresults.txt","a") as pepres:
             seqid=molweight=resi=resweight=charge=ipoint=reduced=bridge=reducedex=bridgeex=expression_prob=None
@@ -106,7 +133,7 @@ else:
                 with open(f"{user_id}resultsprosite.tsv","a") as result:
                     result.writelines(motifres)        
                 os.remove(f"{user_id}{record.id}.tsv")
-
+    os.remove(f"{user_id}tmp.fasta")
          #print("done")
         #with open("resultsprosite.tsv","a") as proresults:
         #    for seqnum,record in enumerate(s):
@@ -136,9 +163,15 @@ else:
         #for seqnum,record in enumerate(s):
             #sp.call(f"patmatmotifs -sformat raw -sprotein Y -sequence {record.seq} -outfile {record.id} -full -rformat excel",shell=True)
             #print(f"done {seqnum}")
-    if count <=100:
+    if len(protein_ids)<=100:
         sp.call(f"clustalo -i {user_id}results.fasta -o {user_id}alignment.fasta",shell=True)
     else:
-        sp.call(f"mafft --quiet --auto {user_id}results.fasta > {user_id}alignment.fasta",shell=True)
-exit()
-
+        sp.call(f"mafft --quiet --auto {user_id}results.fasta > {user_id}alignment.fasta --force",shell=True)
+    #print(f"{user_id}")
+    #call=f"zip {user_id}results.zip ${user_id}*"
+    sp.call(f"zip {user_id}results.zip {user_id}*",shell=True)
+    #sp.call(call,shell=True)
+    exit()
+else:
+    print("No proteins found.")
+    exit()
