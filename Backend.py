@@ -13,11 +13,11 @@ protein = sys.argv[3] if len(sys.argv) > 1 else "glucose-6-phosphatase"
 #sp.call("sh -c \"curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh\"")
 protein_ids=[]
 with open(f"{user_id}pepresults.txt","w") as pepres:
-    pepres.write("ID\tMolecularWeight\tResidueCount\tResidueWeight\tIsoelectricPoint\tExtinctionReduced\tExtinctionBridges\tReducedMgMl\tBridgeMgMl\tProbability(+/-)\n")
+    pepres.write("ID\tMolecularWeight\tResidueCount\tResidueWeight\tCharge\tIsoelectricPoint\tExtinctionReduced\tExtinctionBridges\tReducedMgMl\tBridgeMgMl\tProbability_pos_neg\n")
 with open(f"{user_id}results.fasta","w") as fasta:
     fasta.write("")
 with open(f"{user_id}resultsprosite.tsv","w") as proresults:
-    proresults.write("SeqName\tStart\tEnd\tScore\tStrahd\tMotif\n")
+    proresults.write("SeqName\tStart\tEnd\tScore\tStrand\tMotif\n")
 with open(f"{user_id}alignment.fasta","w") as align:
     align.write("")
 #PROSITE_URL = "https://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi"
@@ -164,9 +164,9 @@ if protein_ids:
             #sp.call(f"patmatmotifs -sformat raw -sprotein Y -sequence {record.seq} -outfile {record.id} -full -rformat excel",shell=True)
             #print(f"done {seqnum}")
     if len(protein_ids)<=100:
-        sp.call(f"clustalo -i {user_id}results.fasta -o {user_id}alignment.fasta",shell=True)
+        sp.call(f"clustalo -i {user_id}results.fasta -o {user_id}alignment.fasta --force",shell=True)
     else:
-        sp.call(f"mafft --quiet --auto {user_id}results.fasta > {user_id}alignment.fasta --force",shell=True)
+        sp.call(f"mafft --quiet --auto {user_id}results.fasta > {user_id}alignment.fasta -v",shell=True)
     #print(f"{user_id}")
     #call=f"zip {user_id}results.zip ${user_id}*"
     sp.call(f"zip {user_id}results.zip {user_id}*",shell=True)
