@@ -18,15 +18,32 @@ function displayTable($conn,$user_id,$selected_id=null) {
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName 
     AND p.user_id = pr.user_id WHERE pr.user_id=?
     ");
-####	$stmt = $conn ->prepare("SELECT 
-####    p.*, 
-####    GROUP_CONCAT(
-####        CONCAT_WS(': ', pr.Start, pr.End, pr.Score,pr.Strand,pr.Motif)
-####        SEPARATOR ' | '
-####    ) AS pro_info
-####FROM pep_table p
-####LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
-####GROUP BY p.SeqName;");
+#	$stmt = $conn->prepare("
+#    SELECT
+#        p.*,
+##        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR ': ') AS pro_info
+ #   FROM pep_table p
+ #   LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
+ #   AND p.user_id = pr.user_id
+#    WHERE pr.user_id = ?
+#    GROUP BY p.SeqName, p.user_id
+	#");
+	#
+$stmt = $conn->prepare("
+    SELECT
+        p.SeqName, 
+	p.MolecularWeight,
+	p.ResidueCount,
+	p.IsoelectricPoint,
+	p.Charge,
+        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+    FROM pep_table p
+    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
+    AND p.user_id = pr.user_id 
+    WHERE pr.user_id = ?
+    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
+
+");
         $stmt->execute([$user_id]);
      }else{
 	     if (!is_array($selected_id)) {
@@ -39,20 +56,28 @@ function displayTable($conn,$user_id,$selected_id=null) {
     return;
 	     }
     $IDlist = implode(',', array_fill(0, count($selected_id), '?'));
-	 $stmt = $conn->prepare("
+	if(count($selected_id)==1){
+	    $stmt = $conn->prepare("
 	    SELECT *
 	    FROM pep_table p
 	    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
 	    WHERE p.SeqName IN ($IDlist) AND pr.user_id=?");
-######$stmt = $conn ->prepare("SELECT
-####    p.*,
-####    GROUP_CONCAT(
-####        CONCAT_WS(': ', pr.Start, pr.End, pr.Score,pr.Strand,pr.Motif)
-####        SEPARATOR ' | '
-####    ) AS pro_info
-####FROM pep_table p
-####LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
-####GROUP BY p.SeqName WHERE p.SeqName IN ($IDlist);");
+	}
+	else{
+	$stmt = $conn->prepare("
+SELECT
+        p.SeqName,
+        p.MolecularWeight,
+        p.ResidueCount,
+        p.IsoelectricPoint,
+        p.Charge,
+        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+    FROM pep_table p
+    LEFT JOIN pro_table pr ON p.SeqName IN ($IDlist)
+    AND p.user_id = pr.user_id
+    WHERE pr.user_id = ?
+    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
+");	};
 	     $params = array_merge($selected_id, [$user_id]);
 	     $stmt->execute($params);
      }

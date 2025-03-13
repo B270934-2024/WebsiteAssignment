@@ -36,9 +36,10 @@ echo <<<_HEAD
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style/style.css">
-
+	
 	</head>
 	<body>
+	<div style="padding-left: 75px; padding-right: 75px;">
 	_HEAD;
 	if(isset($_POST['organism']) && isset($_POST['protein'])){
 	$command = escapeshellcmd("EMAIL=" . escapeshellarg($email) . " python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));

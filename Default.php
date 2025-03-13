@@ -14,7 +14,7 @@ echo <<<_HEAD
 	<link rel="stylesheet" href="style/style.css">
 	</head>
 	<body>
-	<div style="padding-left: 75px;">
+	<div style="padding-left: 75px; padding-right: 75px;">
 	_HEAD;
 
 $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $password, [

@@ -15,7 +15,7 @@ input[type="text"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Full height of the viewport */
+    height: 20vh; /* Full height of the viewport */
 }
 .downloader{
     display: flex;
@@ -64,7 +64,7 @@ tr:nth-child(even) {
 /* Hover Effect */
 tr:hover {
     background-color: #ddd;
-    transition: 0.3s;
+    transition: 0.01s;
 }
 
 /* Responsive Table */
