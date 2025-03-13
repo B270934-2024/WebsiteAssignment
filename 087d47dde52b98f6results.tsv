@@ -1,0 +1,735 @@
+LOCUS       KAJ7421106               358 aa            linear   VRT 20-MAR-2023
+DEFINITION  Glucose-6-phosphatase [Willisornis vidua].
+ACCESSION   KAJ7421106
+VERSION     KAJ7421106.1
+DBLINK      BioProject: PRJNA576680
+            BioSample: SAMN13001521
+DBSOURCE    accession WHWB01033251.1
+KEYWORDS    .
+SOURCE      Willisornis vidua (Xingu scale-backed antbird)
+  ORGANISM  Willisornis vidua
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Thamnophilidae; Willisornis.
+REFERENCE   1  (residues 1 to 358)
+  AUTHORS   Soares,A.E.R., Aleixo,A., Schneider,P., Miyaki,C.Y.,
+            Schneider,M.P., Mello,C. and Vasconcelos,A.T.R.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (23-OCT-2019) Labinfo, LNCC - Laboratorio Nacional de
+            Computacao Cientifica, Rua Getulio Vargas 333, Petropolis, RJ
+            25651070, Brazil
+COMMENT     ##Genome-Assembly-Data-START##
+            Assembly Method        :: ABySS v. 2.0.2
+            Genome Representation  :: Full
+            Expected Final Version :: No
+            Genome Coverage        :: 43.0x
+            Sequencing Technology  :: Illumina MiSeq; Illumina HiSeq
+            ##Genome-Assembly-Data-END##
+            Method: conceptual translation.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Willisornis vidua"
+                     /specimen_voucher="MPEG:80182"
+                     /db_xref="taxon:1566151"
+                     /sex="female"
+                     /tissue_type="muscle"
+                     /dev_stage="adult"
+                     /geo_loc_name="Brazil: Fazenda Juruna, Peixoto de Azevedo,
+                     Mato Grosso"
+     Protein         1..358
+                     /product="Glucose-6-phosphatase"
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC"
+                     /locus_tag="WISP_44872"
+                     /coded_by="join(WHWB01033251.1:780540..780769,
+                     WHWB01033251.1:781275..781384,
+                     WHWB01033251.1:781741..781849,
+                     WHWB01033251.1:782067..782182,
+                     WHWB01033251.1:782282..782793)"
+                     /note="identified by sequence similarity"
+ORIGIN      
+        1 meanmnllhd lgiwathwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhd tdyysnnsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vvallsaagg kkqsrtltyw vlwtvlwmgf wavqvcvcls rvfiaahfph
+      181 qviagvfsgi avaktfqhvr ciyhaslrry lgitfflfsf tlgfylllrv lgvdllwtle
+      241 kaqrwcshpe wvhidttpfa sllrnlgilf glglalnshm yqksfrgkqs qqlpfrlgcv
+      301 aasllilhif dafkppshmq llfyflsfck saavplatvs lipyclshll atqdkksa
+//
+
+LOCUS       KAJ7396366               358 aa            linear   VRT 20-MAR-2023
+DEFINITION  Glucose-6-phosphatase [Pitangus sulphuratus].
+ACCESSION   KAJ7396366
+VERSION     KAJ7396366.1
+DBLINK      BioProject: PRJNA576661
+            BioSample: SAMN13000596
+DBSOURCE    accession WHWA01011406.1
+KEYWORDS    .
+SOURCE      Pitangus sulphuratus
+  ORGANISM  Pitangus sulphuratus
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Tyrannidae; Pitangus.
+REFERENCE   1  (residues 1 to 358)
+  AUTHORS   Soares,A.E.R., Aleixo,A., Schneider,P., Miyaki,C.Y.,
+            Schneider,M.P., Mello,C. and Vasconcelos,A.T.R.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-OCT-2019) Labinfo, LNCC - Laboratorio Nacional de
+            Computacao Cientifica, Rua Getulio Vargas 333, Petropolis, RJ
+            25651070, Brazil
+COMMENT     ##Genome-Assembly-Data-START##
+            Assembly Method        :: ABySS v. 2.0.2
+            Genome Representation  :: Full
+            Expected Final Version :: No
+            Genome Coverage        :: 57.0x
+            Sequencing Technology  :: Illumina MiSeq; Illumina HiSeq
+            ##Genome-Assembly-Data-END##
+            Method: conceptual translation.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Pitangus sulphuratus"
+                     /specimen_voucher="MPEG:80257"
+                     /db_xref="taxon:371930"
+                     /sex="female"
+                     /tissue_type="muscle"
+                     /dev_stage="adult"
+                     /geo_loc_name="Brazil: Cachoeira do Arari, Ilha do Marajo,
+                     Para"
+     Protein         1..358
+                     /product="Glucose-6-phosphatase"
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC"
+                     /locus_tag="BTVI_145934"
+                     /coded_by="join(WHWA01011406.1:300488..300717,
+                     WHWA01011406.1:301200..301309,
+                     WHWA01011406.1:301629..301737,
+                     WHWA01011406.1:301982..302097,
+                     WHWA01011406.1:302197..302708)"
+                     /note="identified by sequence similarity"
+ORIGIN      
+        1 meanmnllhd lgiqtthwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhd tdyynnksap eiqqfpltce tgpgspsgha
+      121 mgaagvyyim vvallsaagg kkqsrtfryw vlwtvlwmgf wavqvcvcls rvfiaahfph
+      181 qviagvfsgm avaktfqhir ciyhaslgry tgitlflfsf tigfylllrv lgvdllwtle
+      241 kaqrwcsrpe wvhidttpfa sllrnlgilf glglavnshm yqkscrgkqg qqlpfrlgcv
+      301 aasllilhif dafkppshmq llfyalsfck saavplttvs lipyclsqll atqdkkaa
+//
+
+LOCUS       KAI6072612               358 aa            linear   VRT 11-AUG-2022
+DEFINITION  Glucose-6-phosphatase [Aix galericulata].
+ACCESSION   KAI6072612
+VERSION     KAI6072612.1
+DBLINK      BioProject: PRJNA787744
+            BioSample: SAMN23839850
+DBSOURCE    accession JALLAJ010000020.1
+KEYWORDS    .
+SOURCE      Aix galericulata (mandarin duck)
+  ORGANISM  Aix galericulata
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Galloanserae; Anseriformes;
+            Anatidae; Anatinae; Aix.
+REFERENCE   1  (residues 1 to 358)
+  AUTHORS   Ng,C.S., Lai,C.K., Ke,H.M., Lee,H.H., Chen,C.F., Tang,P.C.,
+            Cheng,H.C., Lu,M.J., Li,W.H. and Tsai,I.J.
+  TITLE     Genome Assembly and Evolutionary Analysis of the Mandarin Duck Aix
+            galericulata Reveal Strong Genome Conservation among Ducks
+  JOURNAL   Genome Biol Evol 14 (6) (2022)
+   PUBMED   35640266
+REFERENCE   2  (residues 1 to 358)
+  AUTHORS   Tsai,I.J.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-MAR-2022) Biodiversity Research Center, Academia
+            Sinica, 128 Academia Road, Section 2, Nankang, Taipei 11529, Taiwan
+COMMENT     ##Genome-Assembly-Data-START##
+            Assembly Method        :: MaSuRCA v. 3.1.3
+            Genome Representation  :: Full
+            Expected Final Version :: Yes
+            Genome Coverage        :: 230.0x
+            Sequencing Technology  :: Illumina HiSeq
+            ##Genome-Assembly-Data-END##
+            Method: conceptual translation.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Aix galericulata"
+                     /isolate="NCHU-2012"
+                     /db_xref="taxon:8832"
+                     /sex="female"
+                     /tissue_type="blood"
+                     /dev_stage="adult"
+     Protein         1..358
+                     /product="Glucose-6-phosphatase"
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /locus_tag="LUU34_01410500"
+                     /coded_by="join(JALLAJ010000020.1:4845652..4845881,
+                     JALLAJ010000020.1:4846614..4846723,
+                     JALLAJ010000020.1:4847251..4847359,
+                     JALLAJ010000020.1:4847511..4847626,
+                     JALLAJ010000020.1:4847847..4848358)"
+ORIGIN      
+        1 meagmnvlhd agiqathwlq ehfqgsqdwf lfisfaadlr ntffvlfpiw fhfcepvgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhe tnyysnasap aiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsiasg krqsktlkyw vlwmvlwtgf wavqvcvcls rvfiaahfph
+      181 qviagvfsgm avaetfqhvr siyhaslrry lgvttflfsf alglylllra lgvdllwtle
+      241 kaqrwcthpe wvhidttpfa sllrnlgilf glglalnshm ylescrgkqg rqlpfrlgca
+      301 aasllvlhlf dafrppshlq llfyilsfck saavplatvg lipycvsqll atqdkkgv
+//
+
+LOCUS       KAI1230272               370 aa            linear   VRT 24-MAR-2022
+DEFINITION  Glucose-6-phosphatase [Lamprotornis superbus].
+ACCESSION   KAI1230272
+VERSION     KAI1230272.1
+DBLINK      BioProject: PRJNA666448
+            BioSample: SAMN16294059
+DBSOURCE    accession JADDUC020000031.1
+KEYWORDS    .
+SOURCE      Lamprotornis superbus
+  ORGANISM  Lamprotornis superbus
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Sturnidae; Lamprotornis.
+REFERENCE   1  (residues 1 to 370)
+  AUTHORS   Rubenstein,D.R., Corvelo,A., MacManes,M.D., Maia,R., Narzisi,G.,
+            Rousaki,A., Vandenabeele,P., Shawkey,M.D. and Solomon,J.
+  TITLE     Feather Gene Expression Elucidates the Developmental Basis of
+            Plumage Iridescence in African Starlings
+  JOURNAL   J Hered 112 (5), 417-429 (2021)
+   PUBMED   33885791
+REFERENCE   2  (residues 1 to 370)
+  AUTHORS   Rubenstein,D.R.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (08-OCT-2020) Department of Ecology, Evolution &
+            Environmental Biology (E3B), Columbia University, 1200 Amsterdam
+            Avenue, New York, NY 10027, USA
+REFERENCE   3  (residues 1 to 370)
+  AUTHORS   Rubenstein,D.R.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (18-JAN-2022) Department of Ecology, Evolution &
+            Environmental Biology (E3B), Columbia University, 1200 Amsterdam
+            Avenue, New York, NY 10027, USA
+COMMENT     ##Genome-Assembly-Data-START##
+            Assembly Date          :: SEP-2021
+            Assembly Method        :: 3D-DNA v. 2020; JBAT v. SEP-2021
+            Assembly Name          :: CU_Lasu_v2
+            Genome Representation  :: Full
+            Expected Final Version :: Yes
+            Genome Coverage        :: 98.0x
+            Sequencing Technology  :: Illumina HiSeq; Illumina NovaSeq 6000
+            ##Genome-Assembly-Data-END##
+            Method: conceptual translation.
+FEATURES             Location/Qualifiers
+     source          1..370
+                     /organism="Lamprotornis superbus"
+                     /isolate="SS15"
+                     /db_xref="taxon:245042"
+                     /chromosome="27"
+                     /sex="female"
+                     /tissue_type="liver"
+                     /dev_stage="adult"
+                     /geo_loc_name="Kenya: Mpala Research Centre"
+                     /lat_lon="0.323747 N 36.90319180 E"
+                     /collection_date="2008-04-02"
+                     /collected_by="DR Rubenstein"
+     Protein         1..370
+                     /product="Glucose-6-phosphatase"
+     Region          42..293
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     CDS             1..370
+                     /locus_tag="IHE44_0010237"
+                     /coded_by="complement(join(JADDUC020000031.1:2478888..2479
+                     508,JADDUC020000031.1:2479560..2479602,
+                     JADDUC020000031.1:2479835..2479943,
+                     JADDUC020000031.1:2480277..2480386,
+                     JADDUC020000031.1:2480896..2481125))"
+ORIGIN      
+        1 meanmnllhd vgiqtthwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvld tdyygnnsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsaagg ekksrtlryw vlwtvlwigf wavqviagvf sgecirpphp
+      181 fpcsttvpaa ltnaptllla gmavaktfqh vrciyhasfh rylgitlflf sftlgfylll
+      241 wtfgvdllwt lekaqkwcsh pewvhidttp fasllrnlgi lfglglalns hmyqessrlk
+      301 qgqqlpfrlg ciaasllilh ifdafkppsh mqllfyalsf cksaavplat vglipyclsq
+      361 llgtqdkkaa
+//
+
+LOCUS       XP_040473657             358 aa            linear   VRT 08-APR-2021
+DEFINITION  glucose-6-phosphatase [Falco naumanni].
+ACCESSION   XP_040473657
+VERSION     XP_040473657.1
+DBLINK      BioProject: PRJNA719130
+DBSOURCE    REFSEQ: accession XM_040617723.1
+KEYWORDS    RefSeq.
+SOURCE      Falco naumanni (lesser kestrel)
+  ORGANISM  Falco naumanni
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Falconiformes; Falconidae; Falco.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NC_054071.1) annotated using gene prediction method: Gnomon,
+            supported by EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Falco naumanni Annotation Release
+                                           100
+            Annotation Version          :: 100
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.6
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Falco naumanni"
+                     /isolate="bFalNau1"
+                     /specimen_voucher="P51P2 - H187058 (nest 2016-P51)"
+                     /db_xref="taxon:148594"
+                     /chromosome="18"
+                     /sex="female"
+                     /tissue_type="blood"
+                     /dev_stage="juvenile"
+                     /geo_loc_name="Italy: Matera"
+                     /lat_lon="40.67 N 16.60 E"
+                     /collection_date="2016-06-25"
+                     /collected_by="Diego Rubolini"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40687
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_040617723.1:60..1136"
+                     /db_xref="GeneID:121099080"
+ORIGIN      
+        1 mettmnhlhd tgiqatrwlq erfqgsqdwf lfisfaadlr naffvlfpiw fhlsepvgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhe tdyysntsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallstamg kkqsrtlkyw vlwtvlwtgf wavqvcvcls rvfiaahfph
+      181 qviagvisgm avaktfqhir yiyhaslrqy lgitfflfsf algfylllrv lgvdllwtle
+      241 kaqrwcthpe wvhidttpfa sllrnlgilf glglalnshm ylescrgkqg qqlpfrlgci
+      301 aasllvlhlf dafkppshmq llfyilsfck saavplatvg lipycisqll avqhkkgv
+//
+
+LOCUS       XP_040392851             358 aa            linear   VRT 08-APR-2021
+DEFINITION  glucose-6-phosphatase [Cygnus olor].
+ACCESSION   XP_040392851
+VERSION     XP_040392851.1
+DBLINK      BioProject: PRJNA642912
+DBSOURCE    REFSEQ: accession XM_040536917.1
+KEYWORDS    RefSeq.
+SOURCE      Cygnus olor (mute swan)
+  ORGANISM  Cygnus olor
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Galloanserae; Anseriformes;
+            Anatidae; Anserinae; Cygnus.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NC_049193.1) annotated using gene prediction method: Gnomon.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Cygnus olor Annotation Release 100
+            Annotation Version          :: 100
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.6
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Cygnus olor"
+                     /isolate="bCygOlo1"
+                     /db_xref="taxon:8869"
+                     /chromosome="25"
+                     /sex="male"
+                     /tissue_type="muscle"
+                     /dev_stage="adult"
+                     /geo_loc_name="Germany: Mainau"
+                     /lat_lon="50.149850 N 11.063270 E"
+                     /collection_date="2015-07-01"
+                     /collected_by="Robert Kraus"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40348
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_040536917.1:159..1235"
+                     /db_xref="GeneID:121059761"
+ORIGIN      
+        1 meagmnvlhd agiqatrwlq ehfqgsqdwf lfisfaadlr ntffvlfplw fhfcepvgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhe tdyysnastp aiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsivsg krqsktlkyw vlwmalwtgf wavqvcvcls rvfiaahfph
+      181 qviagvfsgm avaetfqhvr siyhaslrry lgvttflfsf algfylllra lgvdllwtle
+      241 kaqrwcahpe wvhidttpfa sllrnlgilf glglalnshm ylescrgkqg rqlpfrlgca
+      301 aasllvlhlf dafrppshlq llfyvlsfck saavplatvg lipycvsqll atqdkkgv
+//
+
+LOCUS       XP_039553177             358 aa            linear   VRT 24-FEB-2021
+DEFINITION  glucose-6-phosphatase [Passer montanus].
+ACCESSION   XP_039553177
+VERSION     XP_039553177.1
+DBLINK      BioProject: PRJNA703052
+DBSOURCE    REFSEQ: accession XM_039697243.1
+KEYWORDS    RefSeq.
+SOURCE      Passer montanus (Eurasian tree sparrow)
+  ORGANISM  Passer montanus
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Passeroidea; Passeridae; Passer.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NW_024358389.1) annotated using gene prediction method: Gnomon,
+            supported by EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Passer montanus Annotation Release
+                                           100
+            Annotation Version          :: 100
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.5
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Passer montanus"
+                     /isolate="IOZ18808"
+                     /db_xref="taxon:9160"
+                     /chromosome="Unknown"
+                     /sex="pooled male and female"
+                     /tissue_type="blood"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40455
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_039697243.1:261..1337"
+                     /db_xref="GeneID:120496616"
+ORIGIN      
+        1 meanmnllhd vgiqtthwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvld tdyygnnsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsaaag qkqsrtlgyw vlwavlwigf wavqvcvcms rvfiaahfph
+      181 qviagvfsgm avaktfqhir ciyhasfhry lgitlflfsf tlgfylllwt fgvdllwtle
+      241 kaqkwcsnpe wvhidttpfa sllrnlgilf glglalnshl yqesswlkqg qqlplrlgci
+      301 aasllilhvf dafkppshmq llfyalsfck saavplatvg lipyclsqll atqhkkaa
+//
+
+LOCUS       XP_010411101             358 aa            linear   VRT 16-FEB-2021
+DEFINITION  glucose-6-phosphatase [Corvus cornix cornix].
+ACCESSION   XP_010411101
+VERSION     XP_010411101.1
+DBLINK      BioProject: PRJNA258180
+DBSOURCE    REFSEQ: accession XM_010412799.2
+KEYWORDS    RefSeq.
+SOURCE      Corvus cornix cornix
+  ORGANISM  Corvus cornix cornix
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Corvoidea; Corvidae; Corvus.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NC_046355.1) annotated using gene prediction method: Gnomon,
+            supported by EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Corvus cornix cornix Annotation
+                                           Release 104
+            Annotation Version          :: 104
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.5
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Corvus cornix cornix"
+                     /isolate="S_Up_H32"
+                     /sub_species="cornix"
+                     /db_xref="taxon:932674"
+                     /chromosome="27"
+                     /sex="male"
+                     /tissue_type="blood"
+                     /geo_loc_name="Sweden: Uppsala"
+                     /collection_date="2010"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40674
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_010412799.2:60..1136"
+                     /db_xref="GeneID:104697772"
+ORIGIN      
+        1 meanmnllhd agirtthwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvld tdyygnnsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsaaeg kkqsrtlryw vlwtvlwmgf wavqgcvcvs rifiaahfph
+      181 qviagvfsgm avaktfhhvr ciynasfrry lgitlflfsf tlgfylllwt fgvdllwtle
+      241 kaqkwcshpe wvhidttpfa sllrnlgilf glglalnshm yqescqlkqg qqlpfrlgci
+      301 avsllilhif dafkppshmq llfyalsfck saavplatvs lipyclsqll atqdkkaa
+//
+
+LOCUS       XP_027601652             358 aa            linear   VRT 10-FEB-2021
+DEFINITION  glucose-6-phosphatase [Pipra filicauda].
+ACCESSION   XP_027601652
+VERSION     XP_027601652.2
+DBLINK      BioProject: PRJNA513059
+DBSOURCE    REFSEQ: accession XM_027745851.2
+KEYWORDS    RefSeq.
+SOURCE      Pipra filicauda (Wire-tailed manakin)
+  ORGANISM  Pipra filicauda
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Pipridae; Pipra.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NW_024104302.1) annotated using gene prediction method: Gnomon,
+            supported by EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            On Feb 10, 2021 this sequence version replaced XP_027601652.1.
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Pipra filicauda Annotation Release
+                                           101
+            Annotation Version          :: 101
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.5
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Pipra filicauda"
+                     /isolate="LSUMZ 115617"
+                     /specimen_voucher="LSUMZ:B-4331"
+                     /db_xref="taxon:649802"
+                     /chromosome="Unknown"
+                     /sex="male"
+                     /tissue_type="muscle"
+                     /dev_stage="adult"
+                     /geo_loc_name="Peru: Loreto Department, Lower Rio Napo
+                     region, E Bank Rio Yanayacu, ca 90 km N Iquitos"
+                     /collected_by="Steven W. Cardiff"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40436
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_027745851.2:38..1114"
+                     /db_xref="GeneID:114001006"
+ORIGIN      
+        1 meanmnllhd lgvrtthwlq qhfqgsqdlf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvhd tdyynntsap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vvallsaagg kkqsrtfgyw vlwmvlwtgf wavqvcvcls rvfiaahfph
+      181 qviagvfsgm avaktfqhvr ciyhaslhry tgitlflfsf tigfylllrv lgvdllwtle
+      241 kaqrwcshpe wvhidttpfa sllrnlgilf glglavnshm ykkscqgkqg qqlpfrlgcv
+      301 tasllilhif dafkppshmq llfyalsfck saavplatvs lipyclshlm atqdkkaa
+//
+
+LOCUS       XP_038019160             358 aa            linear   VRT 14-DEC-2020
+DEFINITION  glucose-6-phosphatase [Motacilla alba alba].
+ACCESSION   XP_038019160
+VERSION     XP_038019160.1
+DBLINK      BioProject: PRJNA684358
+DBSOURCE    REFSEQ: accession XM_038163232.1
+KEYWORDS    RefSeq.
+SOURCE      Motacilla alba alba
+  ORGANISM  Motacilla alba alba
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Archelosauria; Archosauria; Dinosauria; Saurischia; Theropoda;
+            Coelurosauria; Aves; Neognathae; Neoaves; Telluraves; Australaves;
+            Passeriformes; Passeroidea; Motacillidae; Motacilla.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NC_052042.1) annotated using gene prediction method: Gnomon,
+            supported by EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Name             :: Motacilla alba alba Annotation
+                                           Release 100
+            Annotation Version          :: 100
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 8.5
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..358
+                     /organism="Motacilla alba alba"
+                     /isolate="MOTALB_02"
+                     /sub_species="alba"
+                     /db_xref="taxon:1094192"
+                     /chromosome="27"
+                     /sex="male"
+                     /tissue_type="blood"
+                     /geo_loc_name="Sweden: Ottenby, land"
+                     /collection_date="09-Sep-2019"
+                     /collected_by="Erik D. Enbody"
+     Protein         1..358
+                     /product="glucose-6-phosphatase"
+                     /calculated_mol_wt=40424
+     Region          42..281
+                     /region_name="PAP2_glucose_6_phosphatase"
+                     /note="PAP2_like proteins, glucose-6-phosphatase
+                     subfamily. Glucose-6-phosphatase converts
+                     glucose-6-phosphate into free glucose and is active in the
+                     lumen of the endoplasmic reticulum, where it is bound to
+                     the membrane. The generation of free glucose is an...;
+                     cd03381"
+                     /db_xref="CDD:239476"
+     Site            order(76,83,117..119,171,177,181)
+                     /site_type="active"
+                     /db_xref="CDD:239476"
+     CDS             1..358
+                     /gene="G6PC1"
+                     /coded_by="XM_038163232.1:49..1125"
+                     /db_xref="GeneID:119712221"
+ORIGIN      
+        1 meanmnllhd lgiqtthwlq qrfqgsqdwf lfisyaadlr naffvlfpiw fhfseavgir
+       61 liwvavigdw lnlvfkwilf gerpywwvld tdyygnssap eiqqfpltce tgpgspsgha
+      121 mgaagvyyvm vtallsaagg ekqsrtlgyw vlwtvlwigf wavqvcvcms rvfiaahfph
+      181 qviagvfsgm avaktfqhvr ciyhasflry lgitlflfsf tlgfylllwt fgvdllwtle
+      241 kaqkwcsnpe wvhidttpfa sllrnlgilf glglalnshl yqessrlkqg qqlpfrlgci
+      301 aasllilhvf dafkppshmq llfyalsfck saavplatvg lipyclsqll atqhkkaa
+//
+
