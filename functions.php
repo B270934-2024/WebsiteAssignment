@@ -4,7 +4,6 @@ function clearUserResults($conn, $user_id) {
     foreach ($tables as $table) {
         try{$stmt = $conn->prepare("DELETE FROM $table WHERE user_id = ?");
 	$stmt->execute([$user_id]);
-	###echo"<p>Deleted from $table</p>";
 	}catch (PDOException $e) {
             echo "Error in $table: " . $e->getMessage() . "<br>";}
     }
@@ -12,23 +11,6 @@ function clearUserResults($conn, $user_id) {
 function displayTable($conn,$user_id,$selected_id=null) {
 	maketables($conn);
 	if($selected_id=='all'){
-        $stmt = $conn->prepare("
-    SELECT *
-    FROM pep_table p
-    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName 
-    AND p.user_id = pr.user_id WHERE pr.user_id=?
-    ");
-#	$stmt = $conn->prepare("
-#    SELECT
-#        p.*,
-##        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR ': ') AS pro_info
- #   FROM pep_table p
- #   LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
- #   AND p.user_id = pr.user_id
-#    WHERE pr.user_id = ?
-#    GROUP BY p.SeqName, p.user_id
-	#");
-	#
 $stmt = $conn->prepare("
     SELECT
         p.SeqName, 
@@ -36,7 +18,7 @@ $stmt = $conn->prepare("
 	p.ResidueCount,
 	p.IsoelectricPoint,
 	p.Charge,
-        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
     FROM pep_table p
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
     AND p.user_id = pr.user_id 
@@ -56,28 +38,47 @@ $stmt = $conn->prepare("
     return;
 	     }
     $IDlist = implode(',', array_fill(0, count($selected_id), '?'));
-	if(count($selected_id)==1){
-	    $stmt = $conn->prepare("
-	    SELECT *
-	    FROM pep_table p
-	    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
-	    WHERE p.SeqName IN ($IDlist) AND pr.user_id=?");
-	}
-	else{
-	$stmt = $conn->prepare("
-SELECT
+	     if(count($selected_id)==1){
+	    $stmt = $conn->prepare("SELECT
         p.SeqName,
         p.MolecularWeight,
         p.ResidueCount,
-        p.IsoelectricPoint,
-        p.Charge,
+	p.ResidueWeight,
+	p.IsoelectricPoint,
+	p.Charge,
+	p.ExtinctionReduced,
+	p.ExtinctionBridges,
+  p.Probability_pos_neg,
         GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
     FROM pep_table p
-    LEFT JOIN pro_table pr ON p.SeqName IN ($IDlist)
+    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName 
     AND p.user_id = pr.user_id
-    WHERE pr.user_id = ?
-    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
-");	};
+    WHERE p.SeqName IN ($IDlist) AND pr.user_id = ?
+    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.ResidueWeight, p.IsoelectricPoint,p.Charge,p.ExtinctionReduced,p.ExtinctionBridges,p.Probability_pos_neg");
+
+	     } elseif(count($selected_id)==2 AND $selected_id[0]=="MOTIF")
+	     {$stmt = $conn ->prepare("SELECT  
+		     pr.SeqName,	
+		     pr.Start,
+		     pr.End,	
+		     pr.Score,
+		     pr.Strand,
+		     pr.Motif   FROM pro_table pr
+            WHERE pr.SeqName IN ($IDlist) AND pr.user_id=?");
+	     }else{
+	$stmt = $conn->prepare("SELECT  p.SeqName,
+        p.MolecularWeight,
+        p.ResidueCount,
+        p.IsoelectricPoint,
+	p.Charge,
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+	    FROM pep_table p
+	    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName AND pr.user_id=p.user_id
+	    WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
+	GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
+
+    ");	
+	     };
 	     $params = array_merge($selected_id, [$user_id]);
 	     $stmt->execute($params);
      }

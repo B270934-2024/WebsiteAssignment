@@ -28,11 +28,18 @@ if (isset($_COOKIE['user_id'])) {
 } else {
     echo "No user ID found in cookies.";
 }
+#echo "<form method='GET' action=''>
+#    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.</label>
+#    	<input type='text' id='search' name='search' placeholder='Enter SeqName or all...' required>
+#    	<button type='submit'>Search</button>
+#	</form>";
 echo "<form method='GET' action=''>
-    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.</label>
-    	<input type='text' id='search' name='search' placeholder='Enter SeqName or all...' required>
-    	<button type='submit'>Search</button>
-	</form>";
+        <label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
+Alternatively, type MOTIF, and your chosen sequence, to investigate that further.</label>
+        <p></p>
+        <input type='text' id='search' name='search' placeholder='Enter SeqName or all...' required>
+        <button type='submit'>Search</button>
+        </form>";
 maketables($conn);
 $input = isset($_GET['search']) ? $_GET['search'] : 'all';
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["clear_results"])) {

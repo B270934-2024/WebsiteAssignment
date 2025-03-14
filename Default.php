@@ -31,8 +31,10 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
 ##}
 echo "<h1>Our default database of Glucose-6-Phosphatase in Aves</h1>";
 echo "<form method='GET' action=''>
-    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.</label>
-   	<input type='text' id='search' name='search' placeholder='Enter SeqName or all...' required>
+    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
+Alternatively, type MOTIF, and your chosen sequence, to investigate that further.</label>
+	<p></p>
+	<input type='text' id='search' name='search' placeholder='Enter SeqName or all...' required>
     	<button type='submit'>Search</button>
 	</form>";
 maketables($conn);

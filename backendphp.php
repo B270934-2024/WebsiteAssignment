@@ -6,7 +6,10 @@ $email="s2761220@ed.ac.uk";
 #setcookie("user_id", "", time() - 3600, "/"); // Expire the cookie
 #unset($_COOKIE['user_id']); // Remove it from PHP
 include 'functions.php';
-  //if the user does not have a current id (saved session)...
+
+//if the user does not have a current id (saved session)...
+//$user_id=0 if not =0 etc etc etc 
+
 if(!isset($_COOKIE['user_id'])) {
   //create a unique 32character ID  
   $unique_id = generateUUID();
@@ -55,9 +58,9 @@ echo <<<_HEAD
 	</div>";
 	echo "<p>Your id is: $user_id. This is displayed in front of your results.</p>";
 	
-	$file_pathpep = "{$user_id}pepresults.txt";
-	$file_pathali = "{$user_id}alignment.fasta";
-	$file_pathpro = "{$user_id}resultsprosite.tsv";
+	$file_pathpep = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}pepresults.txt";
+	$file_pathali = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}alignment.fasta";
+	$file_pathpro = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}resultsprosite.tsv";
 	uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",	"Start",	"End","Score",	"Strand",	"Motif"],$user_id);
 	uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",	"MolecularWeight",	"ResidueCount",	"ResidueWeight",	"Charge",	"IsoelectricPoint",	"ExtinctionReduced",	"ExtinctionBridges",	"ReducedMgMl",	"BridgeMgMl",	"Probability_pos_neg"],$user_id);
 	uploadfasta($file_pathali,$conn,$user_id);
