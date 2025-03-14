@@ -35,14 +35,14 @@ maketables($conn);
 echo <<<_HEAD
 	<html>
 	<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<title>Simple Protein Search</title>  
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style/style.css">
-	
 	</head>
 	<body>
-	<div style="padding-left: 75px; padding-right: 75px;">
 	_HEAD;
 	if(isset($_POST['organism']) && isset($_POST['protein'])){
 	$command = escapeshellcmd("EMAIL=" . escapeshellarg($email) . " python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
@@ -51,45 +51,37 @@ echo <<<_HEAD
 	echo "<div class='mainheader'>The search for {$_POST['protein']} in {$_POST['organism']} has concluded successfully!</div>";
 	###echo "<img src='/public_html/plotcon.1.png' alt=\"A plotcon graph generated from your search\">";
 	echo "<div class='plotimage'><img src=plotcon.1.png alt='A plotcon graph generated from your search'></div>";
-	echo "<div class = 'downloader'>
-	<a href='{$user_id}results.zip'>
-	<button>Download Results</button>
-	</a>
-	</div>";
-	echo "<p>Your id is: $user_id. This is displayed in front of your results.</p>";
-	
+	echo "	<a href='{$user_id}results.zip' class='btn btn-secondary d-flex'>Download Results</a>";
 	$file_pathpep = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}pepresults.txt";
 	$file_pathali = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}alignment.fasta";
 	$file_pathpro = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}resultsprosite.tsv";
 	uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",	"Start",	"End","Score",	"Strand",	"Motif"],$user_id);
 	uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",	"MolecularWeight",	"ResidueCount",	"ResidueWeight",	"Charge",	"IsoelectricPoint",	"ExtinctionReduced",	"ExtinctionBridges",	"ReducedMgMl",	"BridgeMgMl",	"Probability_pos_neg"],$user_id);
 	uploadfasta($file_pathali,$conn,$user_id);
-	echo"<a href='Results.php'>
-    	<button type='button'>Browse Results</button>
-	</a>";
+	echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex'>Browse Results</a>";
 	#$input = isset($_GET['search']) ? $_GET['search'] : null;
 	#displayTable($conn,"$input"); 
 } else {
 	echo <<<_FORM
 	<form action="backendphp.php" method="post">
 	<pre><font face ="arial">
-	<div class = "mainheader" >Welcome to the simple protein searcher.</div>
-	Please enter the organism and protein you are trying to learn about below!
-	<div class="central-entry">
-	<input type="text" value="aves" name="organism"/>
-	<input type="text" value="glucose-6-phosphatase" name="protein"/>
-	<input type="submit" value="Search"/>
+	<h1>Welcome to the simple protein searcher.</h1>
+	<p class='d-flex'>Please enter the organism and protein you are trying to learn about below!</p>
+	<div class="h20">
+	<input type="text" class="form-control" value="Aves" name="organism"/>
+	<input type="text" class="form-control" value="Glucose-6-phosphatase" name="protein"/>
+	<input type="submit" class = 'btn btn-primary' value="Search"/>
 	</div>
 	</pre>
-	<a href='Default.php'>
-	<button type='button'>Browse Default Results</button>
-	</a>
+	<a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>
 	</form>
 	_FORM;
-	if (file_exists("{$user_id}pepresults.txt")){
-        echo "<a href='Results.php'>
-        <button type='button'>Browse Stored Results</button>
-	</a>";
+
+$stmt = $conn->prepare("SELECT * FROM pep_table  WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	if ($result){
+        echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";
 }
 	echo <<<_TAIL
 	</body>
