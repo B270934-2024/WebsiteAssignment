@@ -47,11 +47,36 @@ echo <<<_HEAD
 	if(isset($_POST['organism']) && isset($_POST['protein'])){
 	$command = escapeshellcmd("EMAIL=" . escapeshellarg($email) . " python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
 	$output = shell_exec($command);
-	###echo $output;
-	echo "<div class='mainheader'>The search for {$_POST['protein']} in {$_POST['organism']} has concluded successfully!</div>";
-	###echo "<img src='/public_html/plotcon.1.png' alt=\"A plotcon graph generated from your search\">";
-	echo "<div class='plotimage'><img src=plotcon.1.png alt='A plotcon graph generated from your search'></div>";
-	echo "	<a href='{$user_id}results.zip' class='btn btn-secondary d-flex'>Download Results</a>";
+	if (strpos($output,"No proteins found.")!==false){
+        echo <<<_FORM
+        <form action="backendphp.php" method="post">
+        <pre><font face ="arial">
+        <h1 class='d-flex'>Welcome to the simple protein searcher.</h1>
+        <p class='d-flex'>Sorry, but we couldn't find any proteins. Please try again.</p>
+        <div class="h20">
+        <input type="text" class="form-control" value="Aves" name="organism"/>
+        <input type="text" class="form-control" value="Glucose-6-phosphatase" name="protein"/>
+        <input type="submit" class = 'btn btn-primary' value="Search"/>
+        </div>
+        </pre>
+        <a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>
+        </form>
+        _FORM;
+        $stmt = $conn->prepare("SELECT * FROM pep_table  WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($result){
+	echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";
+	echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
+
+}
+        echo <<<_TAIL
+        </body>
+
+        </html>
+        _TAIL;
+ }else{
+	echo "<h1 class='d-flex'>The search for {$_POST['protein']} in {$_POST['organism']} has concluded!</h1>";
 	$file_pathpep = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}pepresults.txt";
 	$file_pathali = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}alignment.fasta";
 	$file_pathpro = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}resultsprosite.tsv";
@@ -59,13 +84,15 @@ echo <<<_HEAD
 	uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",	"MolecularWeight",	"ResidueCount",	"ResidueWeight",	"Charge",	"IsoelectricPoint",	"ExtinctionReduced",	"ExtinctionBridges",	"ReducedMgMl",	"BridgeMgMl",	"Probability_pos_neg"],$user_id);
 	uploadfasta($file_pathali,$conn,$user_id);
 	echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex'>Browse Results</a>";
-	#$input = isset($_GET['search']) ? $_GET['search'] : null;
-	#displayTable($conn,"$input"); 
+	echo "<a href='{$user_id}results.zip' class='btn btn-secondary d-flex'>Download Results</a>";
+	echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
+echo "<div class='plotimage'><img src={$user_id}.plotcon.png alt='A plotcon graph generated from your search'></div>";
+		} 
 } else {
 	echo <<<_FORM
 	<form action="backendphp.php" method="post">
 	<pre><font face ="arial">
-	<h1>Welcome to the simple protein searcher.</h1>
+	<h1  class='d-flex'>Welcome to the simple protein searcher.</h1>
 	<p class='d-flex'>Please enter the organism and protein you are trying to learn about below!</p>
 	<div class="h20">
 	<input type="text" class="form-control" value="Aves" name="organism"/>
@@ -82,6 +109,7 @@ $stmt->execute([$user_id]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	if ($result){
         echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";
+echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
 }
 	echo <<<_TAIL
 	</body>

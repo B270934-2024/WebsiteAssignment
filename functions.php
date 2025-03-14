@@ -18,7 +18,7 @@ $stmt = $conn->prepare("
 	p.ResidueCount,
 	p.IsoelectricPoint,
 	p.Charge,
-	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
     FROM pep_table p
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
     AND p.user_id = pr.user_id 
@@ -30,7 +30,6 @@ $stmt = $conn->prepare("
      }else{
 	     if (!is_array($selected_id)) {
 		     $selected_id = explode(',', $selected_id);
-		     #$selected_id = [$selected_id];  // Convert single value to an array
 		     $selected_id = array_map('trim', $selected_id);
 	     }
 	     if (empty($selected_id)) {
@@ -47,14 +46,13 @@ $stmt = $conn->prepare("
 	p.IsoelectricPoint,
 	p.Charge,
 	p.ExtinctionReduced,
-	p.ExtinctionBridges,
-  p.Probability_pos_neg,
-        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+	p.Probability_pos_neg,
+        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
     FROM pep_table p
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName 
     AND p.user_id = pr.user_id
     WHERE p.SeqName IN ($IDlist) AND pr.user_id = ?
-    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.ResidueWeight, p.IsoelectricPoint,p.Charge,p.ExtinctionReduced,p.ExtinctionBridges,p.Probability_pos_neg");
+    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.ResidueWeight, p.IsoelectricPoint,p.Charge,p.ExtinctionReduced,p.Probability_pos_neg");
 
 	     } elseif(count($selected_id)==2 AND $selected_id[0]=="MOTIF")
 	     {$stmt = $conn ->prepare("SELECT  
@@ -71,7 +69,7 @@ $stmt = $conn->prepare("
         p.ResidueCount,
         p.IsoelectricPoint,
 	p.Charge,
-	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '; ') AS Motifs
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
 	    FROM pep_table p
 	    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName AND pr.user_id=p.user_id
 	    WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
@@ -94,9 +92,13 @@ $stmt = $conn->prepare("
     echo "</tr>";
     foreach ($results as $row) {
         echo "<tr>";
-        foreach ($row as $cell) {
+	###$row['Motifs'] = nl2br($row['Motifs']);
+	 if (isset($row['Motifs']) && !is_null($row['Motifs'])) {
+        $row['Motifs'] = nl2br($row['Motifs']);   }
+	foreach ($row as $cell) {
             echo "<td>" . $cell . "</td>";
-        }
+	}
+
         echo "</tr>";
     }
     echo "</table>";

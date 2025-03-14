@@ -34,7 +34,7 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
 echo "<h1>Our default database of Glucose-6-Phosphatase in Aves</h1>";
 echo "<form method='GET' action=''>
    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
-Alternatively, type MOTIF, and your chosen sequence, to investigate that further.</label>
+Alternatively, type 'MOTIF,' and your chosen sequence, to investigate that further.</label>
 	<p></p>
 	<div class='d-flex justify-content-between gap-2 mt-2'>
 	<input type='text' class = 'form-control me-2' id='search' name='search' placeholder='Enter SeqName or all...' required>
