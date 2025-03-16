@@ -88,6 +88,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex'>Browse Results</a>";
 	echo "<a href='{$user_id}results.zip' class='btn btn-secondary d-flex'>Download Results</a>";
 	echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
+	echo "<a href='CreditAndContacts.php' class='btn btn-secondary d-flex'>Credit and Contacts</a>";
+
 echo "<div class='plotimage d-flex'><img src={$_POST['organism']}_{$_POST['protein']}_{$user_id}.plotcon.png alt='A plotcon graph generated from your search'></div>";
 		} 
 } else {
