@@ -26,7 +26,7 @@ with open(f"{user_id}alignment.fasta","w") as align:
 #search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
 print(f"{user_id}")
 Entrez.email="s2761220@ed.ac.uk"
-search_handle = Entrez.esearch(db="protein", term=f"{species}[Organism] AND {protein}[Protein]", retmax=10)
+search_handle = Entrez.esearch(db="protein", term=f"{species}[Organism] AND {protein}[Protein]", retmax=100)
 search_results = Entrez.read(search_handle)
 search_handle.close()
 protein_ids = search_results['IdList']
