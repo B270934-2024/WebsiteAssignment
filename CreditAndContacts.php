@@ -43,35 +43,21 @@ echo <<<_HEAD
         _HEAD;
 
 echo "<pre><font face ='arial'>
-        <h1  class='d-flex'>Help and Context.</h1>
-	<p class='d-flex'>This website is designed for bioinformatics analysis specifically for retrieving and analyzing protein sequence from a user-defined taxonomic group or species. It allows users to:
-- Fetch protein sequences for an organism of interest. Subsequently, these are then analysed via several EMBOSS tools.
-- These data are then stored, and once can revisit previous results associated with your unique ID, generated on your first page load. Yours is {$user_id}!
-- The primary use of this site is to investigate proteins of a specific class within or between species. It can be used to generate your own database to BLAST against.</p>
-	<h3 class='d-flex'>How to use this website.</h3>
-<p class='d-flex' >- Enter the organism name and protein of interest in the search form.
-- Click the Search button to fetch and analyze sequences.
-- If no sequences are found, you will be returned to the search page, with a short error message
-- Stored results can be accessed at any time via the Browse Stored Results button. These are automatically removed after 7 days.
-- You can download the results as a .zip file using the Download Results button.
-- You can search for specific sequences by entering their sequence names.
-- To explore motifs, type MOTIF, sequence in the search box.</p>
-<h3 class='d-flex'>What is this telling me?</h3>
-<p class='d-flex'>-Are the proteins all of a similar size? Are their statistics similar? They are likely highly conserved!
--Do they share common motifs? They are also likely conserved!
--It might be worth using a BLAST on this too, to determine exactly how similar they are.
--Otherwise, inspect the 'PrettyPlot' and the 'Plotcon' plot to determine this graphically!</p>
-</pre>
-        <a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>
-        ";
-
+        <h1  class='d-flex'>Credits and Contacts.</h1>
+	<p class='d-flex'>Thank you for using the Simple Protein Searcher. The code used to create this site is available <a href='https://github.com/B270934-2024/WebsiteAssignment'>here</a>.
+<p class='d-flex'>Thank you all to the good people on StackOverflow for providing help with the various coding issues I faced, and ELM for aiding the debugging process.</p> 
+<p class='d-flex'>Also thank you to Al Iverns and all of my coursemates for the help and motivation!</p>
+<p class='d-flex'>Finally, thanks to everyone who created the EMBOSS tools that the site makes very liberal use of, and to NCBI for providing an excellent database to query!</p>
+<p class='d-flex'>If you have any questions or suggestsions, I would love to hear them. You can contact me <a href='mailto:s2761220@ed.ac.uk'>here</a>!</p>
+</pre>";
+	echo "<a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>";
 $stmt = $conn->prepare("SELECT * FROM pep_table  WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($result){
         echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";}
-echo "<a href='CreditAndContacts.php' class='btn btn-secondary d-flex'>Credit and Contacts</a>";
 
+echo "<a href='HelpAndContext.php' class = 'btn btn-secondary d-flex'>Help and Context</a>";
 echo "<a href='backendphp.php' class='btn btn-secondary d-flex'>Back to Search</a>";
 
         echo <<<_TAIL

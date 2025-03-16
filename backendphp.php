@@ -112,9 +112,10 @@ $stmt = $conn->prepare("SELECT * FROM pep_table  WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	if ($result){
-        echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";
+        echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";}
 echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
-}
+echo "<a href='CreditAndContacts.php' class='btn btn-secondary d-flex'>Credit and Contacts</a>";
+
 	echo <<<_TAIL
 	</body>
 	
