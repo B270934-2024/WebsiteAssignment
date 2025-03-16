@@ -24,6 +24,7 @@ with open(f"{user_id}alignment.fasta","w") as align:
 #species=input("What organism group??\n")
 #protein=input("What protein or protein family?\n")
 #search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
+print(f"{user_id}")
 Entrez.email="s2761220@ed.ac.uk"
 search_handle = Entrez.esearch(db="protein", term=f"{species}[Organism] AND {protein}[Protein]", retmax=10)
 search_results = Entrez.read(search_handle)
@@ -37,46 +38,8 @@ if protein_ids:
     file_name = f"{species}_{protein}_{user_id}results.fasta"
     with open(file_name, "w") as fasta_file:
         fasta_file.write(fasta_data)
-#result = sp.run(search, shell=True, check=True, stdout=sp.PIPE, stderr=sp.PIPE)
-#if result.returncode == 0:
-#    print("ok")
-    # Handle successful command
-   # with open(f"{user_id}results.fasta", "w") as fasta_file:
-   #print(result.stdout.decode('utf-8'))
-#else:
-#    print(f"An error occurred: {result.stderr.decode('utf-8')}")
-#    exit()
-#try:
-    #sp.call(search,shell=True)
-#    print("worked")
-    #with open(f"{user_id}results.fasta", "w") as fasta_file:
-        #fasta_file.write(result.stdout.decode('utf-8'))
-#except sp.CalledProcessError as e:
- #   print("An Error Occured.")
-  #  print(e.stderr.decode('utf-8'))
-    #species=input("What organism group??\n")
-    #protein=input("What protein or protein family?\n")
-    #search="esearch -db protein -query \"\'"+species+"\'*[Organism] AND \'"+protein+"\'*[Protein]\"| efetch -format fasta >> results.fasta"
 
-#Unsure why its not finding any results???
-#count=0
-#with open(f"{user_id}results.fasta","r") as fasta:
-#    for line in fasta:
-#        if re.findall(".*>.*",line):
-#            line=line.upper().rstrip("\n")
-#            count +=1
-#            i=str(re.findall(">\w*",line))
-#            fastlist.append(i[3:-2])
-#if count==0:
-#    print(search)
-#    print("Error: 0 Proteins found. Please try again.")
-#    exit()
-    print(str(len(protein_ids))+" proteins found.")
-    
-    #with open(f"{user_id}results.tsv","w") as tabdata:
-    # tabdata.write("")
-    #search=f"esearch -db gene -query \"\'{species}\'[Organism] AND \'{protein}\*\'[Protein]\"| efetch -format tabular >> {user_id}results.tsv"
-    #sp.call(search,shell=True)   
+    print(str(len(protein_ids))+" proteins found.")  
     fetch_handle = Entrez.efetch(db="protein", id=protein_ids, rettype="text", retmode="text")
     tsv_data = fetch_handle.read()
     fetch_handle.close()
@@ -86,7 +49,7 @@ if protein_ids:
     
     sp.call(f"plotcon -sequences {species}_{protein}_{user_id}results.fasta -winsize 10 -graph png",shell=True)
     sp.call(f"cp plotcon.1.png {species}_{protein}_{user_id}.plotcon.png",shell=True)
-    sp.call(f"pepstats {user_id}results.fasta -outfile {species}_{protein}_{user_id}pepstats.txt",shell=True)
+    sp.call(f"pepstats {species}_{protein}_{user_id}results.fasta -outfile {species}_{protein}_{user_id}pepstats.txt",shell=True)
     if len(protein_ids) < 20:
         sp.call(f"prettyplot {user_id}results.fasta -graph pdf",shell=True)
         sp.call(f"mv prettyplot.pdf {species}_{protein}_{user_id}prettyplot.pdf",shell=True)
@@ -134,7 +97,9 @@ if protein_ids:
                 with open(f"{user_id}{record.id}.tsv","r") as add:
                     motifres=add.readlines()[1:]
                 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","a") as result:
-                    result.writelines(motifres)        
+                    result.writelines(motifres)
+            else:
+                print("no file")
                 os.remove(f"{user_id}{record.id}.tsv")
     os.remove(f"{user_id}tmp.fasta")
         ##check this file, turn into tsv, count # of motifs. 

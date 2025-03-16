@@ -4,9 +4,9 @@ $username = "s2761220";
 $password = "!AEZZ)C1aezz0c";
 $email="s2761220@ed.ac.uk";
 #setcookie("user_id", "", time() - 3600, "/"); // Expire the cookie
-#unset($_COOKIE['user_id']); // Remove it from PHP
+//unset($_COOKIE['user_id']); // Remove it from PHP
 include 'functions.php';
-
+##$user_id="";
 //if the user does not have a current id (saved session)...
 //$user_id=0 if not =0 etc etc etc 
 
@@ -14,7 +14,7 @@ if(!isset($_COOKIE['user_id'])) {
   //create a unique 32character ID  
   $unique_id = generateUUID();
   //make the this a cookie saved in the browser, and last 1 week
-  setcookie("user_id", $unique_id, time() + (86400 * 7), "/");
+  setcookie('user_id', $unique_id, time() + (86400 * 7), "/");
   $user_id=$_COOKIE['user_id'];
   #echo $unique_id;
   } else {
@@ -47,6 +47,8 @@ echo <<<_HEAD
 	if(isset($_POST['organism']) && isset($_POST['protein'])){
 	$command = escapeshellcmd("EMAIL=" . escapeshellarg($email) . " python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
 	$output = shell_exec($command);
+	echo $output;
+	shell_exec("clustalo -i Aves_Glucose-6-phosphatase_c824441ab8e9a47bresults.fasta -o Aves_Glucose-6-phosphatase_c824441ab8e9a47balignment.fasta --force");
 	if (strpos($output,"No proteins found.")!==false){
         echo <<<_FORM
         <form action="backendphp.php" method="post">
@@ -86,7 +88,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex'>Browse Results</a>";
 	echo "<a href='{$user_id}results.zip' class='btn btn-secondary d-flex'>Download Results</a>";
 	echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
-echo "<div class='plotimage'><img src={$user_id}.plotcon.png alt='A plotcon graph generated from your search'></div>";
+echo "<div class='plotimage d-flex'><img src={$_POST['organism']}_{$_POST['protein']}_{$user_id}.plotcon.png alt='A plotcon graph generated from your search'></div>";
 		} 
 } else {
 	echo <<<_FORM
