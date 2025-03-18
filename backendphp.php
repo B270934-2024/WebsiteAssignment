@@ -15,9 +15,9 @@ if(!isset($_COOKIE['user_id'])) {
   $unique_id = generateUUID();
   //make the this a cookie saved in the browser, and last 1 week
   setcookie('user_id', $unique_id, time() + (86400 * 7), "/");
-  $user_id=$_COOKIE['user_id'];
-  #echo $unique_id;
-  } else {
+  usleep(1);
+  $user_id=$unique_id;
+} else {
 	//user's id becomes what it was   
 	  $user_id=$_COOKIE['user_id'];
  //$user_id="087d47dde52b98f6";
