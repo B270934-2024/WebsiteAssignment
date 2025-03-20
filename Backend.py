@@ -98,6 +98,7 @@ if protein_ids:
                     motifres=add.readlines()[1:]
                 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","a") as result:
                     result.writelines(motifres)
+                os.remove(f"{user_id}{record.id}.tsv")
             else:
                 print("no file")
                 os.remove(f"{user_id}{record.id}.tsv")
