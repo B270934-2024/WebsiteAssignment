@@ -4,6 +4,7 @@ function clearUserResults($conn, $user_id) {
     foreach ($tables as $table) {
         try{$stmt = $conn->prepare("DELETE FROM $table WHERE user_id = ?");
 	$stmt->execute([$user_id]);
+	shell_exec("rm -f *{$user_id}*");
 	}catch (PDOException $e) {
             echo "Error in $table: " . $e->getMessage() . "<br>";}
     }
@@ -13,17 +14,19 @@ function displayTable($conn,$user_id,$selected_id=null) {
 	if($selected_id=='all'){
 $stmt = $conn->prepare("
     SELECT
-        p.SeqName, 
-	p.MolecularWeight,
+        MAX(ts.Organism) AS Organism,
+	p.SeqName,
+        p.MolecularWeight,
 	p.ResidueCount,
 	p.IsoelectricPoint,
 	p.Charge,
 	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
     FROM pep_table p
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
+    LEFT JOIN ts_table ts ON p.SeqName = ts.SeqName
     AND p.user_id = pr.user_id 
     WHERE pr.user_id = ?
-    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
+    GROUP BY p.SeqName,  p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
 
 ");
         $stmt->execute([$user_id]);
@@ -39,7 +42,8 @@ $stmt = $conn->prepare("
     $IDlist = implode(',', array_fill(0, count($selected_id), '?'));
 	     if(count($selected_id)==1){
 	    $stmt = $conn->prepare("SELECT
-        p.SeqName,
+	ts.Organism,
+	p.SeqName,
         p.MolecularWeight,
         p.ResidueCount,
 	p.ResidueWeight,
@@ -47,39 +51,52 @@ $stmt = $conn->prepare("
 	p.Charge,
 	p.ExtinctionReduced,
 	p.Probability_pos_neg,
-        GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
     FROM pep_table p
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName 
     AND p.user_id = pr.user_id
+    LEFT JOIN ts_table ts ON p.SeqName = ts.SeqName
     WHERE p.SeqName IN ($IDlist) AND pr.user_id = ?
-    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.ResidueWeight, p.IsoelectricPoint,p.Charge,p.ExtinctionReduced,p.Probability_pos_neg");
+    GROUP BY p.SeqName, ts.Organism,p.MolecularWeight,p.ResidueCount,p.ResidueWeight, p.IsoelectricPoint,p.Charge,p.ExtinctionReduced,p.Probability_pos_neg");
 
 	     } elseif(count($selected_id)==2 AND $selected_id[0]=="MOTIF")
 	     {$stmt = $conn ->prepare("SELECT  
-		     pr.SeqName,	
+		     MAX(ts.Organism) as Organism,
+		     pr.SeqName,
 		     pr.Start,
 		     pr.End,	
 		     pr.Score,
 		     pr.Strand,
 		     pr.Motif   FROM pro_table pr
-            WHERE pr.SeqName IN ($IDlist) AND pr.user_id=?");
-	     }else{
-	$stmt = $conn->prepare("SELECT  p.SeqName,
+			 LEFT JOIN ts_table ts ON pr.SeqName = ts.SeqName
+	    WHERE pr.SeqName IN ($IDlist) AND pr.user_id=?
+	    GROUP BY Organism,pr.SeqName,pr.Start,pr.End,pr.Score,pr.Strand,pr.Motif");
+	     } elseif(count($selected_id)==2 AND $selected_id[0]=="ALIGNMENT")
+             {$stmt = $conn ->prepare("SELECT
+                     MAX(ts.Organism) as Organism,
+                     fa.SeqName,
+		     MAX(fa.Sequence) as Alignment
+			FROM fasta_table fa
+                         LEFT JOIN ts_table ts ON fa.SeqName = ts.SeqName
+	    WHERE fa.SeqName IN ($IDlist) AND fa.user_id=?
+	    GROUP BY Organism,fa.SeqName,fa.Sequence");
+             }
+	     else{
+	$stmt = $conn->prepare("SELECT ts.Organism,p.SeqName,
         p.MolecularWeight,
         p.ResidueCount,
         p.IsoelectricPoint,
 	p.Charge,
-	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motifs
+	GROUP_CONCAT(DISTINCT pr.Motif SEPARATOR '\n ') AS Motif
 	    FROM pep_table p
 	    LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName AND pr.user_id=p.user_id
-	    WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
-	GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
-
-    ");	
-	     };
-	     $params = array_merge($selected_id, [$user_id]);
+LEFT JOIN ts_table ts ON pr.SeqName = ts.SeqName	
+WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
+	GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge,ts.Organism
+    ");
+	     };}
+	     $params = is_array($selected_id) ? array_merge($selected_id, [$user_id]) : [$user_id];
 	     $stmt->execute($params);
-     }
      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
      if(!$results)
      {echo "<p>No results!</p>";return;}
@@ -91,14 +108,18 @@ $stmt = $conn->prepare("
     }
     echo "</tr>";
     foreach ($results as $row) {
-        echo "<tr>";
+        echo "<tr class='tr'>";
 	###$row['Motifs'] = nl2br($row['Motifs']);
 	 if (isset($row['Motifs']) && !is_null($row['Motifs'])) {
         $row['Motifs'] = nl2br($row['Motifs']);   }
-	foreach ($row as $cell) {
-            echo "<td>" . $cell . "</td>";
+	if (isset($row['Alignment']) && !is_null($row['Alignment'])){
+		$row['Alignment'] = chunk_split($row['Alignment'], 60, "\n");
+		$row['Alignment'] = nl2br($row['Alignment']);
+	
 	}
-
+	foreach ($row as $cell) {
+            echo "<td class='td'>" . $cell . "</td>";
+	}
         echo "</tr>";
     }
     echo "</table>";
@@ -191,7 +212,11 @@ function maketables($conn){
 	    Sequence TEXT NOT NULL,
 	    user_id VARCHAR(255)
         )",
-
+	"CREATE TABLE IF NOT EXISTS ts_table(
+SeqName VARCHAR(255),
+Organism VARCHAR(255),
+Length INT,
+user_id VARCHAR(255))",
         "CREATE TABLE IF NOT EXISTS pro_table (
             SeqName VARCHAR(255),
             Start INT NOT NULL,

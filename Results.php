@@ -26,7 +26,7 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
 echo	"<h1>Your Database</h1>";
 echo "<form method='GET' action=''>
         <label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
-Alternatively, type 'MOTIF,' and your chosen sequence, to investigate that further.</label>
+Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investigate that further.</label>
         <p>Your User ID is: {$user_id}</p>
         <div class='d-flex justify-content-between gap-3 mt-3'>
         <input type='text' class = 'form-control me-2' id='search' name='search' placeholder='Enter SeqName or all...' required>

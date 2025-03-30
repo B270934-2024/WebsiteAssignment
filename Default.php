@@ -25,6 +25,15 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
     PDO::MYSQL_ATTR_LOCAL_INFILE => true
   ]);
 
+        $file_pathpep = "Aves_Glucose-6-phosphatase_09d20e21531bf452pepresults.txt";
+        $file_pathali = "Aves_Glucose-6-phosphatase_09d20e21531bf452alignment.fasta";
+        $file_pathpro = "Aves_Glucose-6-phosphatase_09d20e21531bf452resultsprosite.tsv";
+        $file_pathtsv = "Aves_Glucose-6-phosphatase_09d20e21531bf452results.tsv";
+        uploadtsv($file_pathtsv,$conn,"ts_table",["SeqName","Organism","Length"],"09d20e21531bf452");
+        uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",   "Start",        "End","Score",  "Strand",       "Motif"],"09d20e21531bf452");
+        uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",   "MolecularWeight",      "ResidueCount", "ResidueWeight",        "Charge",       "IsoelectricPoint",     "ExtinctionReduced",    "ExtinctionBridges",    "ReducedMgMl",  "BridgeMgMl",   "Probability_pos_neg"],"09d20e21531bf452");
+        uploadfasta($file_pathali,$conn,"09d20e21531bf452");
+
 ##if (isset($_COOKIE['user_id'])) {
 ##    $user_id = $_COOKIE['user_id'];
 ##    echo "User ID from cookie: " . htmlspecialchars($user_id);
@@ -34,7 +43,7 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
 echo "<h1>Our default database of Glucose-6-Phosphatase in Aves</h1>";
 echo "<form method='GET' action=''>
    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
-Alternatively, type 'MOTIF,' and your chosen sequence, to investigate that further.</label>
+Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investigate that further.</label>
 	<p></p>
 	<div class='d-flex justify-content-between gap-2 mt-2'>
 	<input type='text' class = 'form-control me-2' id='search' name='search' placeholder='Enter SeqName or all...' required>
@@ -42,12 +51,12 @@ Alternatively, type 'MOTIF,' and your chosen sequence, to investigate that furth
 	</div></form>";
 	echo "<div class='d-flex gap-2 mt-2'>
 	<a href='backendphp.php' class='btn btn-secondary flex-grow-1' style='height:50px';>Back to Search</a>
-<a href='087d47dde52b98f6results.zip'class='btn btn-secondary flex-grow-1' style='height: 50px';>Download Results</a></div>";
+<a href='09d20e21531bf452results.zip'class='btn btn-secondary flex-grow-1' style='height: 50px';>Download Results</a></div>";
 
 maketables($conn);
 $input = isset($_GET['search']) ? $_GET['search'] : 'all';
 if (isset($_GET['search'])) {
     $input = $_GET['search'];
-displayTable($conn,"087d47dde52b98f6",$input);  
+displayTable($conn,"09d20e21531bf452",$input);  
 };
 ?>

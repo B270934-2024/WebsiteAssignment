@@ -26,6 +26,9 @@ input[type="text"] {
 
 .plotimage{
 text-align: center;
+height: auto; 
+max-width: 50%;
+justify-content:center;
 }
 
 .table-container {
@@ -38,10 +41,11 @@ text-align: center;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     margin-top: 20px;
+    margin-right:75px;
 }
 
 .table th {
-    background-color: #007bff;
+    background-color: #4a6d8c;
     color: white;
     padding: 10px;
     text-align: left;
@@ -54,17 +58,18 @@ text-align: center;
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
+    background-color: transparent;
 }
 
 /* Alternating Row Colors */
-tr:nth-child(even) {
+.table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
 /* Hover Effect */
-tr:hover {
-    background-color: #ddd;
-    transition: 0.01s;
+.table tr:hover {
+    background-color: #d4d4d4;
+    transition: 0.1s;
 }
 
 /* Responsive Table */
@@ -136,14 +141,14 @@ body {
 
 /* Search Button */
 .btn-primary {
-  background-color: #007bff;
+  background-color: #04386e;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #02254a;
 }
 
 /* Browse Results Buttons */

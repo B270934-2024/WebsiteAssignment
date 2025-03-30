@@ -44,21 +44,23 @@ echo <<<_HEAD
 	</head>
 	<body>
 	_HEAD;
-	if(isset($_POST['organism']) && isset($_POST['protein'])){
-	$command = escapeshellcmd("EMAIL=" . escapeshellarg($email) . " python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
+	if(isset($_POST['organism']) && isset($_POST['protein']) && !empty($_POST['protein']) && !empty($_POST['organism'])){
+	$command = escapeshellcmd("python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
 	$output = shell_exec($command);
-	echo $output;
-	shell_exec("clustalo -i Aves_Glucose-6-phosphatase_c824441ab8e9a47bresults.fasta -o Aves_Glucose-6-phosphatase_c824441ab8e9a47balignment.fasta --force");
+	#$output=trim($output);
+	#echo $output;
 	if (strpos($output,"No proteins found.")!==false){
         echo <<<_FORM
         <form action="backendphp.php" method="post">
         <pre><font face ="arial">
-        <h1 class='d-flex'>Welcome to the simple protein searcher.</h1>
+        <h1  class='d-flex'>The simple protein searcher.</h1>
         <p class='d-flex'>Sorry, but we couldn't find any proteins. Please try again.</p>
         <div class="h20">
         <input type="text" class="form-control" value="Aves" name="organism"/>
         <input type="text" class="form-control" value="Glucose-6-phosphatase" name="protein"/>
-        <input type="submit" class = 'btn btn-primary' value="Search"/>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+        <input type="submit" class = 'btn btn-primary d-flex' value="Search"/>
         </div>
         </pre>
         <a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>
@@ -82,6 +84,8 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$file_pathpep = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}pepresults.txt";
 	$file_pathali = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}alignment.fasta";
 	$file_pathpro = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}resultsprosite.tsv";
+	$file_pathtsv = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}results.tsv";
+	uploadtsv($file_pathtsv,$conn,"ts_table",["SeqName","Organism","Length"],$user_id);
 	uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",	"Start",	"End","Score",	"Strand",	"Motif"],$user_id);
 	uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",	"MolecularWeight",	"ResidueCount",	"ResidueWeight",	"Charge",	"IsoelectricPoint",	"ExtinctionReduced",	"ExtinctionBridges",	"ReducedMgMl",	"BridgeMgMl",	"Probability_pos_neg"],$user_id);
 	uploadfasta($file_pathali,$conn,$user_id);
@@ -90,18 +94,19 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	echo "<a href='HelpAndContext.php' class='btn btn-secondary d-flex'>Help and Context</a>";
 	echo "<a href='CreditAndContacts.php' class='btn btn-secondary d-flex'>Credit and Contacts</a>";
 
-echo "<div class='plotimage d-flex'><img src={$_POST['organism']}_{$_POST['protein']}_{$user_id}.plotcon.png alt='A plotcon graph generated from your search'></div>";
+echo "<center><img src={$_POST['organism']}_{$_POST['protein']}_{$user_id}.plotcon.png alt='A plotcon graph generated from your search'></center>";
 		} 
-} else {
-	echo <<<_FORM
+} else { echo <<<_FORM
 	<form action="backendphp.php" method="post">
 	<pre><font face ="arial">
-	<h1  class='d-flex'>Welcome to the simple protein searcher.</h1>
+	<h1  class='d-flex'>The simple protein searcher.</h1>
 	<p class='d-flex'>Please enter the organism and protein you are trying to learn about below!</p>
 	<div class="h20">
 	<input type="text" class="form-control" value="Aves" name="organism"/>
 	<input type="text" class="form-control" value="Glucose-6-phosphatase" name="protein"/>
-	<input type="submit" class = 'btn btn-primary' value="Search"/>
+	</div>
+	<div class="d-flex justify-content-center mt-3">
+	<input type="submit" class = 'btn btn-primary d-flex' value="Search"/>
 	</div>
 	</pre>
 	<a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>

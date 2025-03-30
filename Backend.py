@@ -5,9 +5,13 @@ import subprocess as sp
 from Bio import SeqIO
 from Bio import Entrez
 s=[]
-user_id = sys.argv[1] if len(sys.argv) > 1 else "unknown"
-species= sys.argv[2] if len(sys.argv) > 1 else "aves"
-protein = sys.argv[3] if len(sys.argv) > 1 else "glucose-6-phosphatase"
+user_id = sys.argv[1] if len(sys.argv) > 1 else "None"
+species= sys.argv[2] if len(sys.argv) > 1 else "None"
+protein = sys.argv[3] if len(sys.argv) > 1 else "None"
+print(sys.argv)
+if sys.argv[2] == '' or sys.argv[3] == '' or "None" in sys.argv:
+    print("No proteins found.")
+    exit()
 #sp.call("sh -c '$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)'",shell=True)
 #sp.call("export PATH=${HOME}/edirect:${PATH}",shell=True)
 #sp.call("sh -c \"curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh\"")
@@ -38,15 +42,24 @@ if protein_ids:
     file_name = f"{species}_{protein}_{user_id}results.fasta"
     with open(file_name, "w") as fasta_file:
         fasta_file.write(fasta_data)
-
+    
     print(str(len(protein_ids))+" proteins found.")  
-    fetch_handle = Entrez.efetch(db="protein", id=protein_ids, rettype="text", retmode="text")
-    tsv_data = fetch_handle.read()
+    fetch_handle = Entrez.efetch(db="protein", id=protein_ids, rettype="xml")
+    tsv_data = Entrez.read(fetch_handle)
     fetch_handle.close()
+    tsv_lines = ["SeqName\tOrganism\tDefinition\tLength"]
+    for entry in tsv_data:
+        accession = entry.get("GBSeq_accession-version","N/A")
+        organism = entry.get("GBSeq_organism","N/A")
+        definition = entry.get("GBSeq_definition","N/A")
+        length = entry.get("GBSeq_length","N/A")
+        tsv_lines.append(f"{accession}\t{organism}\t{definition}\t{length}")
     file_name = f"{species}_{protein}_{user_id}results.tsv"
     with open(file_name, "w") as tsv_file:
-        tsv_file.write(tsv_data)
+        tsv_file.write("\n".join(tsv_lines))
+
     
+
     sp.call(f"plotcon -sequences {species}_{protein}_{user_id}results.fasta -winsize 10 -graph png",shell=True)
     sp.call(f"cp plotcon.1.png {species}_{protein}_{user_id}.plotcon.png",shell=True)
     sp.call(f"pepstats {species}_{protein}_{user_id}results.fasta -outfile {species}_{protein}_{user_id}pepstats.txt",shell=True)
@@ -99,6 +112,7 @@ if protein_ids:
                 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","a") as result:
                     result.writelines(motifres)
                 os.remove(f"{user_id}{record.id}.tsv")
+
             else:
                 print("no file")
                 os.remove(f"{user_id}{record.id}.tsv")
@@ -147,6 +161,19 @@ if protein_ids:
     else:
         sp.call(f"zip {user_id}results.zip *{user_id}*",shell=True)
     #sp.call(call,shell=True)
+    print("ok")
+    #show sequences!
+    #too much greyscale + ipad design.
+    #instead of buttons have an overhead bar
+    #search to the right
+    #reset button on main page to reset
+    #default should be not grey
+    #bad = red 
+    #good = blue
+    #clear should show up red.
+    #first page could all be one column
+    #figma can help create figures for this.
+    #show sequences
     exit()
 else:
     print("No proteins found.")
