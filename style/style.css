@@ -1,178 +1,290 @@
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full height of the viewport */
+/* Modern Bioinformatics Theme */
+:root {
+    --primary-blue: #003366;
+    --secondary-blue: #00509d;
+    --accent-teal: #4db6ac;
+    --light-gray: #f8f9fa;
+    --dark-gray: #2c3e50;
+}
+/* Help Page Specific Styles */
+.user-id-badge {
+    background: #e3f2fd;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+.user-id-badge .badge {
+    background: var(--primary-blue);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
 }
 
-input[type="text"] {
-    font-size: 16px;
-    padding: 10px;
-    border: 2px solid #333;
-    border-radius: 5px;
+.help-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
 }
-.mainheader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh; /* Full height of the viewport */
-}
-.downloader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh; /* Full height of the viewport */
+.help-section:last-child {
+    border-bottom: none;
 }
 
-.plotimage{
-text-align: center;
-height: auto; 
-max-width: 50%;
-justify-content:center;
+.feature-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
+.guide-step {
+    display: flex;
+    align-items: start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.tip-card {
+    background: white;
+    border-left: 4px solid var(--accent-teal);
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.tip-header {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.alert-info {
+    background: #e3f2fd;
+    border-color: #bbdefb;
+    color: var(--primary-blue);
+}
+body {
+    background-color: var(--light-gray);
+    font-family: 'Arial', sans-serif;
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+/* Add these table-specific styles */
 .table-container {
     max-width: 100%;
-    overflow-x: auto; /* Allows horizontal scrolling */
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    margin: 1.5rem 0;
 }
 
-.table {
-    width: 100%;
+.protein-table {
+    min-width: 1000px; /* Minimum width for better mobile handling */
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    margin-top: 20px;
-    margin-right:75px;
+    font-size: 0.9em;
 }
 
-.table th {
-    background-color: #4a6d8c;
-    color: white;
-    padding: 10px;
-    text-align: left;
-    font-weight: bold;
-    border: 1px solid #ddd;
+.protein-table th {
+    white-space: nowrap;
+    background-color: #003366 !important;
+    padding: 12px 15px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
 }
 
-/* Table Rows */
-.table td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-    background-color: transparent;
+.protein-table td {
+    padding: 12px 15px;
+    max-width: 300px;
+    word-break: break-word;
+    vertical-align: top;
 }
 
-/* Alternating Row Colors */
-.table tr:nth-child(even) {
-    background-color: #f2f2f2;
+.motif-cell {
+    max-width: 250px;
+    white-space: normal;
 }
 
-/* Hover Effect */
-.table tr:hover {
-    background-color: #d4d4d4;
-    transition: 0.1s;
-}
-
-/* Responsive Table */
+/* Add to existing media query */
 @media (max-width: 768px) {
-    table {
-       font-size: 14px;
+    .protein-table {
+        font-size: 0.8em;
     }
-    th, td {
-        padding: 6px;
+    .protein-table td, 
+    .protein-table th {
+        padding: 8px 10px;
     }
 }
-/* General Page Styling */
-body {
-  background-color: #f8f9fa; /* Light grey background */
-  font-family: Arial, sans-serif;
-  margin: 75px;
-  padding-left: 75px; 
-  padding-right: 75px;
-}
-
-/* Navigation Bar */
+/* Professional Navigation Bar */
 .navbar {
-  background-color: #343a40 !important; /* Dark background */
+    background-color: var(--primary-blue) !important;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navbar-brand {
-  color: white !important;
-  font-weight: bold;
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
 }
 
-/* Centered Search Container */
-.search-container {
-  margin-top: 60px;
+.nav-link {
+    color: rgba(255,255,255,0.8) !important;
+    font-weight: 500;
+    margin: 0 15px;
+    transition: all 0.3s ease;
 }
 
-/* Search Card */
-.search-card {
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+.nav-link:hover {
+    color: white !important;
+    transform: translateY(-2px);
 }
 
-/* Card Header */
-.search-card .card-header {
-  background-color: #4CAF50;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 8px 8px 0 0;
+/* Main Content Container */
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
 }
 
-/* Card Body */
-.search-card .card-body {
-  background-color: #ffffff;
-  padding: 20px;
+/* Scientific Card Style */
+.sci-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    margin: 1.5rem 0;
+    padding: 2rem;
 }
 
-/* Form Labels */
-.form-label {
-  font-weight: bold;
-  color: #333;
+.sci-card-header {
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Form Inputs */
-.form-control {
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.sci-card-title {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
-/* Search Button */
-.btn-primary {
-  background-color: #04386e;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+/* Enhanced Table Styling */
+.protein-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
 }
 
-.btn-primary:hover {
-  background-color: #02254a;
+.protein-table thead {
+    background-color: var(--primary-blue);
+    color: white;
 }
 
-/* Browse Results Buttons */
-.btn-secondary {
-  background-color: #6c757d;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+.protein-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
-.btn-secondary:hover {
-  background-color: #5a6268;
+.protein-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: white;
 }
 
-/* Center Browse Buttons */
-.d-flex {
-  justify-content: center;
-  margin-top: 15px;
+.protein-table tr:hover td {
+    background-color: #f5faff;
 }
 
-/* Mobile Optimization */
+/* Bioinformatics Button Styles */
+.btn-bio {
+    background-color: var(--secondary-blue);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.btn-bio:hover {
+    background-color: var(--primary-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-bio-secondary {
+    background-color: var(--accent-teal);
+}
+
+/* Search Form Styling */
+.search-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.form-control-bio {
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0.8rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control-bio:focus {
+    border-color: var(--secondary-blue);
+    box-shadow: none;
+}
+
+/* Visualization Section */
+.visualization-container {
+    background: white;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+.visualization-title {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--accent-teal);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .search-container {
-    margin-top: 30px;
-  }
+    .main-container {
+        padding: 0 1rem;
+    }
+    
+    .protein-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .sci-card {
+        padding: 1.5rem;
+    }
 }
-
