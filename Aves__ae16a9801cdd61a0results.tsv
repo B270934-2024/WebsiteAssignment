@@ -1,0 +1,101 @@
+SeqName	Organism	Definition	Length
+9DQY_I	Passer domesticus	Chain I, Cadherin domain-containing protein	103
+9DQY_H	Passer domesticus	Chain H, Cadherin domain-containing protein	103
+9DQY_G	Passer domesticus	Chain G, Cadherin domain-containing protein	103
+XQJ33637.1	Goldmania violiceps	ATP synthase F0 subunit 8 (mitochondrion) [Goldmania violiceps]	55
+XQJ33636.1	Goldmania violiceps	NADH dehydrogenase subunit 4L (mitochondrion) [Goldmania violiceps]	98
+XQJ33635.1	Goldmania violiceps	NADH dehydrogenase subunit 3 (mitochondrion) [Goldmania violiceps]	99
+XQJ33634.1	Goldmania violiceps	NADH dehydrogenase subunit 6 (mitochondrion) [Goldmania violiceps]	173
+XQJ33633.1	Goldmania violiceps	ATP synthase F0 subunit 6 (mitochondrion) [Goldmania violiceps]	227
+XQJ33632.1	Goldmania violiceps	cytochrome c oxidase subunit II (mitochondrion) [Goldmania violiceps]	227
+XQJ33631.1	Goldmania violiceps	cytochrome c oxidase subunit III (mitochondrion) [Goldmania violiceps]	261
+XQJ33630.1	Goldmania violiceps	NADH dehydrogenase subunit 1 (mitochondrion) [Goldmania violiceps]	325
+XQJ33629.1	Goldmania violiceps	NADH dehydrogenase subunit 2 (mitochondrion) [Goldmania violiceps]	346
+XQJ33628.1	Goldmania violiceps	cytochrome b (mitochondrion) [Goldmania violiceps]	380
+XQJ33627.1	Goldmania violiceps	NADH dehydrogenase subunit 4 (mitochondrion) [Goldmania violiceps]	456
+XQJ33626.1	Goldmania violiceps	cytochrome c oxidase subunit I (mitochondrion) [Goldmania violiceps]	516
+XQJ33625.1	Goldmania violiceps	NADH dehydrogenase subunit 5 (mitochondrion) [Goldmania violiceps]	604
+9MFB_A	Gallus gallus	Chain A, Villin-1	36
+9MFA_A	Gallus gallus	Chain A, Villin-1	36
+9MF9_A	Gallus gallus	Chain A, Villin-1	36
+9MF8_A	Gallus gallus	Chain A, Villin-1	36
+9MF7_A	Gallus gallus	Chain A, Villin-1	36
+3W3D_A	Gallus gallus	Chain A, Actin, gamma-enteric smooth muscle	374
+3H1H_W	Gallus gallus	Chain W, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 7.2 KDA PROTEIN	61
+3H1H_V	Gallus gallus	Chain V, Cytochrome b-c1 complex subunit Rieske, mitochondrial	47
+3H1H_U	Gallus gallus	Chain U, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 11 KDA PROTEIN	77
+3H1H_T	Gallus gallus	Chain T, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX UBIQUINONE-BINDING PROTEIN QP-C	81
+3H1H_S	Gallus gallus	Chain S, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 14 KDA PROTEIN	110
+3H1H_R	Gallus gallus	Chain R, Cytochrome b-c1 complex subunit Rieske, mitochondrial	196
+3H1H_Q	Gallus gallus	Chain Q, CYTOCHROME C1, HEME PROTEIN, MITOCHONDRIAL	241
+3H1H_P	Gallus gallus	Chain P, Cytochrome b	380
+3H1H_O	Gallus gallus	Chain O, UBIQUINOL-CYTOCHROME-C REDUCTASE COMPLEX CORE PROTEIN 2, MITOCHONDRIAL	441
+3H1H_N	Gallus gallus	Chain N, UBIQUINOL-CYTOCHROME-C REDUCTASE COMPLEX CORE PROTEIN I, MITOCHONDRIAL	446
+3H1H_J	Gallus gallus	Chain J, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 7.2 KDA PROTEIN	61
+3H1H_I	Gallus gallus	Chain I, Cytochrome b-c1 complex subunit Rieske, mitochondrial	47
+3H1H_H	Gallus gallus	Chain H, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 11 KDA PROTEIN	77
+3H1H_G	Gallus gallus	Chain G, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX UBIQUINONE-BINDING PROTEIN QP-C	81
+3H1H_F	Gallus gallus	Chain F, UBIQUINOL-CYTOCHROME C REDUCTASE COMPLEX 14 KDA PROTEIN	110
+3H1H_E	Gallus gallus	Chain E, Cytochrome b-c1 complex subunit Rieske, mitochondrial	196
+3H1H_D	Gallus gallus	Chain D, CYTOCHROME C1, HEME PROTEIN, MITOCHONDRIAL	241
+3H1H_C	Gallus gallus	Chain C, Cytochrome b	380
+3H1H_B	Gallus gallus	Chain B, UBIQUINOL-CYTOCHROME-C REDUCTASE COMPLEX CORE PROTEIN 2, MITOCHONDRIAL	441
+3H1H_A	Gallus gallus	Chain A, UBIQUINOL-CYTOCHROME-C REDUCTASE COMPLEX CORE PROTEIN I, MITOCHONDRIAL	446
+1BCC_I	Gallus gallus	Chain I, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	33
+1BCC_B	Gallus gallus	Chain B, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	422
+1YQ4_D	Gallus gallus	Chain D, SUCCINATE DEHYDROGENASE CYTOCHROME B, SMALL SUBUNIT	103
+1YQ4_C	Gallus gallus	Chain C, SUCCINATE DEHYDROGENASE CYTOCHROME B, LARGE SUBUNIT	141
+1YQ4_B	Gallus gallus	Chain B, succinate dehydrogenase Ip subunit	252
+1YQ4_A	Gallus gallus	Chain A, Succinate dehydrogenase flavoprotein subunit	621
+NP_001006362.1	Gallus gallus	3-hydroxyisobutyrate dehydrogenase, mitochondrial [Gallus gallus]	333
+1MDU_E	Gallus gallus	Chain E, a-actin	377
+1MDU_B	Gallus gallus	Chain B, a-actin	377
+1MVW_R	Gallus gallus	Chain R, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_Q	Gallus gallus	Chain Q, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_P	Gallus gallus	Chain P, SKELETAL MUSCLE MYOSIN II	840
+1MVW_O	Gallus gallus	Chain O, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_N	Gallus gallus	Chain N, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_M	Gallus gallus	Chain M, SKELETAL MUSCLE MYOSIN II	840
+1MVW_L	Gallus gallus	Chain L, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_K	Gallus gallus	Chain K, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_J	Gallus gallus	Chain J, SKELETAL MUSCLE MYOSIN II	840
+1MVW_I	Gallus gallus	Chain I, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_H	Gallus gallus	Chain H, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_G	Gallus gallus	Chain G, SKELETAL MUSCLE MYOSIN II	840
+1MVW_F	Gallus gallus	Chain F, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_E	Gallus gallus	Chain E, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_D	Gallus gallus	Chain D, SKELETAL MUSCLE MYOSIN II	840
+1MVW_C	Gallus gallus	Chain C, SKELETAL MUSCLE MYOSIN II ESSENTIAL; LIGHT CHAIN	147
+1MVW_B	Gallus gallus	Chain B, SKELETAL MUSCLE MYOSIN II REGULATORY; LIGHT CHAIN	145
+1MVW_A	Gallus gallus	Chain A, SKELETAL MUSCLE MYOSIN II	840
+1BCC_J	Gallus gallus	Chain J, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	62
+1BCC_H	Gallus gallus	Chain H, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	78
+1BCC_G	Gallus gallus	Chain G, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	81
+1BCC_F	Gallus gallus	Chain F, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	109
+1BCC_E	Gallus gallus	Chain E, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	196
+1BCC_D	Gallus gallus	Chain D, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	241
+1BCC_C	Gallus gallus	Chain C, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	380
+1BCC_A	Gallus gallus	Chain A, UBIQUINOL CYTOCHROME C OXIDOREDUCTASE	446
+1TAT_B	Gallus gallus	Chain B, ASPARTATE AMINOTRANSFERASE	401
+1TAT_A	Gallus gallus	Chain A, ASPARTATE AMINOTRANSFERASE	401
+1TAR_B	Gallus gallus	Chain B, ASPARTATE AMINOTRANSFERASE	401
+1TAR_A	Gallus gallus	Chain A, ASPARTATE AMINOTRANSFERASE	401
+8AAT_B	Gallus gallus	Chain B, ASPARTATE AMINOTRANSFERASE	401
+8AAT_A	Gallus gallus	Chain A, ASPARTATE AMINOTRANSFERASE	401
+7AAT_B	Gallus gallus	Chain B, ASPARTATE AMINOTRANSFERASE	401
+7AAT_A	Gallus gallus	Chain A, ASPARTATE AMINOTRANSFERASE	401
+1RCM_B	Gallus gallus	Chain B, HEN EGG WHITE LYSOZYME	129
+1RCM_A	Gallus gallus	Chain A, HEN EGG WHITE LYSOZYME	129
+NP_001074354.1	Gallus gallus	prohibitin-2 [Gallus gallus]	301
+WWO16528.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	204
+WWO16529.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	206
+WWO16530.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	202
+WWO16527.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	205
+WWO16525.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	202
+WWO16526.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	206
+WWO16524.1	Megapodius nicobariensis abbotti	cytochrome c oxidase subunit I, partial (mitochondrion) [Megapodius nicobariensis abbotti]	203
+NP_001337009.1	Anas platyrhynchos	leptin precursor [Anas platyrhynchos]	168
+NP_001297758.1	Anas platyrhynchos	caveolin-3 [Anas platyrhynchos]	151
+NP_001297743.1	Anas platyrhynchos	caveolin-1 [Anas platyrhynchos]	178
+NP_001297745.1	Anas platyrhynchos	interleukin-2 receptor subunit alpha precursor [Anas platyrhynchos]	226
+NP_001297741.1	Anas platyrhynchos	mid1-interacting protein 1-B-like [Anas platyrhynchos]	133

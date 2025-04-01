@@ -72,14 +72,14 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
     PDO::MYSQL_ATTR_LOCAL_INFILE => true
   ]);
 
-        $file_pathpep = "Aves_Glucose-6-phosphatase_09d20e21531bf452pepresults.txt";
-        $file_pathali = "Aves_Glucose-6-phosphatase_09d20e21531bf452alignment.fasta";
-        $file_pathpro = "Aves_Glucose-6-phosphatase_09d20e21531bf452resultsprosite.tsv";
-        $file_pathtsv = "Aves_Glucose-6-phosphatase_09d20e21531bf452results.tsv";
-        uploadtsv($file_pathtsv,$conn,"ts_table",["SeqName","Organism","Length"],"09d20e21531bf452");
-        uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",   "Start",        "End","Score",  "Strand",       "Motif"],"09d20e21531bf452");
-        uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",   "MolecularWeight",      "ResidueCount", "ResidueWeight",        "Charge",       "IsoelectricPoint",     "ExtinctionReduced",    "ExtinctionBridges",    "ReducedMgMl",  "BridgeMgMl",   "Probability_pos_neg"],"09d20e21531bf452");
-        uploadfasta($file_pathali,$conn,"09d20e21531bf452");
+        $file_pathpep = "Aves_Glucose-6-phosphatase_ae16a9801cdd61a0pepresults.txt";
+        $file_pathali = "Aves_Glucose-6-phosphatase_ae16a9801cdd61a0alignment.fasta";
+        $file_pathpro = "Aves_Glucose-6-phosphatase_ae16a9801cdd61a0resultsprosite.tsv";
+        $file_pathtsv = "Aves_Glucose-6-phosphatase_ae16a9801cdd61a0results.tsv";
+        uploadtsv($file_pathtsv,$conn,"ts_table",["SeqName","Organism","Length"],"ae16a9801cdd61a0");
+        uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",   "Start",        "End","Score",  "Strand",       "Motif"],"ae16a9801cdd61a0");
+        uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",   "MolecularWeight",      "ResidueCount", "ResidueWeight",        "Charge",       "IsoelectricPoint",     "ExtinctionReduced",    "ExtinctionBridges",    "ReducedMgMl",  "BridgeMgMl",   "Probability_pos_neg"],"ae16a9801cdd61a0");
+        uploadfasta($file_pathali,$conn,"ae16a9801cdd61a0");
 
 ##if (isset($_COOKIE['user_id'])) {
 ##    $user_id = $_COOKIE['user_id'];
@@ -101,7 +101,7 @@ Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investig
                                 <a href='backendphp.php' class='btn btn-outline-primary'>
                         <i class='bi bi-search me-2'></i>New Search
                     </a>
-                                <a href='09d20e21531bf452results.zip' class='btn btn-outline-success'>
+                                <a href='ae16a9801cdd61a0results.zip' class='btn btn-outline-success'>
                                     <i class='bi bi-download me-2'></i>Download Results
                                 </a>
                             </div>";
@@ -113,7 +113,7 @@ if (isset($_GET['search'])) {
     echo '<div class="table-container">';
     $input = $_GET['search'];
     
-displayTable($conn,"09d20e21531bf452",$input);
+displayTable($conn,"ae16a9801cdd61a0",$input);
 echo '</div></div></body></content>';
 };
 
