@@ -100,30 +100,30 @@ WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
      if(!$results)
      {echo "<p>No results!</p>";return;}
-     echo "<table class='table'>";
-    echo "<tr class='tr'>";
-    // Table Headers (Generate dynamically)
+    echo "<div class='table-container'>";
+    echo "<table class='protein-table'>";
+    echo "<thead><tr>";
     foreach (array_keys($results[0]) as $column) {
-        echo "<th class='th'>" . htmlspecialchars($column) . "</th>";
+        echo "<th>" . htmlspecialchars($column) . "</th>";
     }
-    echo "</tr>";
+    echo "</tr></thead><tbody>";
+    
     foreach ($results as $row) {
-        echo "<tr class='tr'>";
-	###$row['Motifs'] = nl2br($row['Motifs']);
-	 if (isset($row['Motifs']) && !is_null($row['Motifs'])) {
-        $row['Motifs'] = nl2br($row['Motifs']);   }
-	if (isset($row['Alignment']) && !is_null($row['Alignment'])){
-		$row['Alignment'] = chunk_split($row['Alignment'], 60, "\n");
-		$row['Alignment'] = nl2br($row['Alignment']);
-	
-	}
-	foreach ($row as $cell) {
-            echo "<td class='td'>" . $cell . "</td>";
-	}
+        echo "<tr>";
+        foreach ($row as $key => $cell) {
+            if ($key === 'Motifs') {
+                // Handle motifs with line breaks
+                echo "<td class='motif-cell'>" . nl2br(htmlspecialchars($cell)) . "</td>";
+            } else {
+                echo "<td>" . htmlspecialchars($cell) . "</td>";
+            }
+        }
         echo "</tr>";
     }
-    echo "</table>";
+    
+    echo "</tbody></table></div>";
 }
+
 function generateUUID() {
     return bin2hex(random_bytes(8)); 
   }
