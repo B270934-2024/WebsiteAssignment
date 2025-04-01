@@ -14,6 +14,7 @@ echo <<<_HEAD
     <title>Protein Database - ProteinExplorer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -80,17 +81,45 @@ Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investig
         <input type='text' class = 'form-control me-2' id='search' name='search' placeholder='Enter SeqName or all...' required>
         <button type='submit' class='btn btn-primary'>Search</button>
         </div></form>";
-echo "<div class='d-flex gap-3 mt-3 align-items-stretch'>
-        <a href='backendphp.php' class='btn btn-secondary flex-grow-1' style='height: 50px;'>Back to Search</a>
-	<a href='{$user_id}results.zip'class='btn btn-secondary flex-grow-1' style='height: 50px';>Download Results</a>
-	</div>";
+	echo "<div class='d-grid gap-2'>
+                                <a href='backendphp.php' class='btn btn-outline-primary'>
+                        <i class='bi bi-search me-2'></i>New Search
+                    </a>
+                                <a href='{$user_id}results.zip' class='btn btn-outline-success'>
+                                    <i class='bi bi-download me-2'></i>Download Results
+                                </a>
+                            </div>";
 
-echo "<form method='POST' action='' class='d-flex justify-content-center'>
-	<input type='hidden' name='clear_results' value='1'>
-    <button type='submit' class='btn btn-secondary w-50' style='height: 50px;'>Clear My Results</button>
+echo <<<CLEAR_FORM
+<style>
+    .btn-clear-results {
+        background: white;
+        color: #dc3545;
+        border: 2px solid #dc3545;
+        transition: all 0.3s ease;
+    }
+    .btn-clear-results:hover {
+        background: #dc3545;
+        color: white;
+        border-color: #dc3545;
+    }
+    .btn-clear-results:focus {
+        box-shadow: 0 0 0 0.25rem rgba(220,53,69,.3);
+    }
+</style>
+
+<div class="mt-4 text-center">
+    <form method='POST' action='' onsubmit="return confirm('Warning: This will permanently delete all your results. Continue?')">
+        <input type='hidden' name='clear_results' value='1'>
+        <button type='submit' class='btn btn-clear-results btn-lg px-4 py-2'>
+            <i class='bi bi-trash3 me-2'></i>Clear All Results
+        </button>
+        <p class='text-danger small mt-2 fw-semibold'>
+            <i class='bi bi-exclamation-triangle-fill'></i> This action is permanent
+        </p>
+    </form>
 </div>
-</form>";
-
+CLEAR_FORM;
 
 $input = isset($_GET['search']) ? $_GET['search'] : 'all';
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["clear_results"])) {

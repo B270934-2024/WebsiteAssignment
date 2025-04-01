@@ -14,6 +14,7 @@ echo <<<_HEAD
     <title>Protein Database - ProteinExplorer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -95,9 +96,15 @@ Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investig
 	<input type='text' class = 'form-control me-2' id='search' name='search' placeholder='Enter SeqName or all...' required>
    	<button type='submit' class='btn btn-primary'>Search</button>
 	</div></form>";
-	echo "<div class='d-flex gap-2 mt-2'>
-	<a href='backendphp.php' class='btn btn-secondary flex-grow-1' style='height:50px';>Back to Search</a>
-<a href='09d20e21531bf452results.zip'class='btn btn-secondary flex-grow-1' style='height: 50px';>Download Results</a></div>";
+	echo "
+                            <div class='d-grid gap-2'>
+                                <a href='backendphp.php' class='btn btn-outline-primary'>
+                        <i class='bi bi-search me-2'></i>New Search
+                    </a>
+                                <a href='09d20e21531bf452results.zip' class='btn btn-outline-success'>
+                                    <i class='bi bi-download me-2'></i>Download Results
+                                </a>
+                            </div>";
 
 maketables($conn);
 $input = isset($_GET['search']) ? $_GET['search'] : 'all';
