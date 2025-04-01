@@ -6,19 +6,65 @@ $email="s2761220@ed.ac.uk";
 include 'functions.php';
 
 echo <<<_HEAD
-	<html>
-	<head>
-	 <title>Simple Protein Results</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="style/style.css">
-	</head>
-	<body>
-	
-	_HEAD;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein Database - ProteinExplorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            padding-top: 80px; 
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #003366 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+    </style>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="backendphp.php">ProteinExplorer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Default.php?search=all">Default Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="HelpAndContext.php">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreditAndContacts.php">Credits</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <main class="container">
+_HEAD;
 $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $password, [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
@@ -40,7 +86,7 @@ $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $pa
 ##} else {
 ##    echo "No user ID found in cookies.";
 ##}
-echo "<h1>Our default database of Glucose-6-Phosphatase in Aves</h1>";
+echo "<content><body><h1>Our default database of Glucose-6-Phosphatase in Aves</h1>";
 echo "<form method='GET' action=''>
    	<label for='search'>Search by Sequence Name: Enter comma separated list of SeqNames or 'all'.
 Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investigate that further.</label>
@@ -56,7 +102,12 @@ Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investig
 maketables($conn);
 $input = isset($_GET['search']) ? $_GET['search'] : 'all';
 if (isset($_GET['search'])) {
+    echo '<div class="visualization-container mt-5" style="overflow-x: auto;">';
+    echo '<div class="table-container">';
     $input = $_GET['search'];
-displayTable($conn,"09d20e21531bf452",$input);  
+    
+displayTable($conn,"09d20e21531bf452",$input);
+echo '</div></div></body></content>';
 };
+
 ?>

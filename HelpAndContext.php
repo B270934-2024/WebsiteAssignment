@@ -1,86 +1,161 @@
 <?php
-$servername = "127.0.0.1"; //localhost didn't work
+$servername = "127.0.0.1";
 $username = "s2761220";
 $password = "!AEZZ)C1aezz0c";
-$email="s2761220@ed.ac.uk";
-#setcookie("user_id", "", time() - 3600, "/"); // Expire the cookie
-#unset($_COOKIE['user_id']); // Remove it from PHP
+$email = "s2761220@ed.ac.uk";
 include 'functions.php';
 
-//if the user does not have a current id (saved session)...
-//$user_id=0 if not =0 etc etc etc
-
 if(!isset($_COOKIE['user_id'])) {
-  //create a unique 32character ID
-  $unique_id = generateUUID();
-  //make the this a cookie saved in the browser, and last 1 week
-  setcookie("user_id", $unique_id, time() + (86400 * 7), "/");
-  $user_id=$_COOKIE['user_id'];
-  #echo $unique_id;
-  } else {
-        //user's id becomes what it was
-          $user_id=$_COOKIE['user_id'];
- //$user_id="087d47dde52b98f6";
-  }
-try {
-  #$conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $password);
-  $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $password, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
-    PDO::MYSQL_ATTR_LOCAL_INFILE => true
-  ]);
-echo <<<_HEAD
-        <html>
-        <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <title>Simple Protein Search</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style/style.css">
-        </head>
-        <body>
-        _HEAD;
-
-echo "<pre><font face ='arial'>
-        <h1  class='d-flex'>Help and Context.</h1>
-	<p class='d-flex'>This website is designed for bioinformatics analysis specifically for retrieving and analyzing protein sequence from a user-defined taxonomic group or species. It allows users to:
-- Fetch protein sequences for an organism of interest. Subsequently, these are then analysed via several EMBOSS tools.
-- These data are then stored, and once can revisit previous results associated with your unique ID, generated on your first page load. Yours is {$user_id}!
-- The primary use of this site is to investigate proteins of a specific class within or between species. It can be used to generate your own database to BLAST against.</p>
-	<h3 class='d-flex'>How to use this website.</h3>
-<p class='d-flex' >- Enter the organism name and protein of interest in the search form.
-- Click the Search button to fetch and analyze sequences.
-- If no sequences are found, you will be returned to the search page, with a short error message
-- Stored results can be accessed at any time via the Browse Stored Results button. These are automatically removed after 7 days.
-- You can download the results as a .zip file using the Download Results button.
-- You can search for specific sequences by entering their sequence names.
-- To explore motifs, type MOTIF, sequence in the search box.</p>
-<h3 class='d-flex'>What is this telling me?</h3>
-<p class='d-flex'>-Are the proteins all of a similar size? Are their statistics similar? They are likely highly conserved!
--Do they share common motifs? They are also likely conserved!
--It might be worth using a BLAST on this too, to determine exactly how similar they are.
--Otherwise, inspect the 'PrettyPlot' and the 'Plotcon' plot to determine this graphically!</p>
-</pre>
-        <a href='Default.php?search=all' class = 'btn btn-secondary d-flex'>Browse Default Results</a>
-        ";
-
-$stmt = $conn->prepare("SELECT * FROM pep_table  WHERE user_id = ?");
-$stmt->execute([$user_id]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($result){
-        echo "<a href='Results.php?search=all' class='btn btn-secondary d-flex' >Browse Stored Results</a>";}
-echo "<a href='CreditAndContacts.php' class='btn btn-secondary d-flex'>Credit and Contacts</a>";
-
-echo "<a href='backendphp.php' class='btn btn-secondary d-flex'>Back to Search</a>";
-
-        echo <<<_TAIL
-        </body>
-
-        </html>
-        _TAIL;
-} catch(PDOException $e) {
-  echo "Connection failed: " . $e->getMessage();
+    $unique_id = generateUUID();
+    setcookie("user_id", $unique_id, time() + (86400 * 7), "/");
+    $user_id = $_COOKIE['user_id'];
+} else {
+    $user_id = $_COOKIE['user_id'];
 }
 
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=s2761220_website", $username, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+        PDO::MYSQL_ATTR_LOCAL_INFILE => true
+    ]);
+
+    echo <<<_HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - ProteinExplorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+        body { 
+            padding-top: 80px; 
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #003366 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fff !important;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="backendphp.php">ProteinExplorer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Default.php?search=all">Default Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="HelpAndContext.php">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="CreditAndContacts.php">Credits</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="sci-card">
+            <div class="sci-card-header">
+                <h1 class="sci-card-title">Help Center</h1>
+                <div class="user-id-badge">
+                    Your Session ID: <span class="badge bg-primary">{$user_id}</span>
+                </div>
+            </div>
+            <div class="sci-card-body">
+                <div class="help-section">
+                    <h3 class="section-title">About This Platform</h3>
+                    <p class="lead">A bioinformatics analysis tool for protein sequence retrieval and analysis across taxonomic groups.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-card">
+                            
+                            <h4>Key Capabilities</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle me-2"></i>Fetch & analyze protein sequences using EMBOSS tools</li>
+                                <li><i class="bi bi-check-circle me-2"></i>Store results with 7-day retention</li>
+                                <li><i class="bi bi-check-circle me-2"></i>Comparative analysis between species</li>
+                                <li><i class="bi bi-check-circle me-2"></i>Generate custom BLAST databases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section mt-5">
+                    <h3 class="section-title">User Guide</h3>
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h5>Basic Search</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="bi bi-search me-2"></i>
+                                    Enter organism name and protein of interest
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-play-circle me-2"></i>
+                                    Click Search to initiate analysis
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    Invalid searches return with error messages
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="guide-step mt-4">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h5>Advanced Features</h5>
+                            <div class="alert alert-info">
+                                <i class="bi bi-shield-check me-2"></i>
+                                <strong>Motif Analysis:</strong> Use "MOTIF, [sequence]" format in search
+                            </div>
+                            <div class="alert alert-info">
+                                <i class="bi bi-shield-check me-2"></i>
+                                <strong>Alignment Analysis:</strong> Use "ALIGNMENT, [sequence]" format in search
+                            </div>
+                            <div class="alert alert-info">
+                                <i class="bi bi-clock-history me-2"></i>
+                                <strong>Result Management:</strong> Automatically cleared after 7 days
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+_HEAD;
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
 ?>
