@@ -22,8 +22,6 @@ with open(f"{species}_{protein}_{user_id}results.fasta","w") as fasta:
     fasta.write("")
 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","w") as proresults:
     proresults.write("SeqName\tStart\tEnd\tScore\tStrand\tMotif\n")
-with open(f"{user_id}alignment.fasta","w") as align:
-    align.write("")
 #PROSITE_URL = "https://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi"
 #species=input("What organism group??\n")
 #protein=input("What protein or protein family?\n")
@@ -157,7 +155,7 @@ if protein_ids:
     if os.path.exists(f"{user_id}results.zip"):
         sp.call(f"unzip -o {user_id}results.zip -d {user_id}resultstmp",shell=True)
         sp.call(f"cd {user_id}_temp && zip -r ../{user_id}results *{user_id}*", shell=True)
-        sp.call(f"rm -rf {user_id}_temp",shell=True)
+        sp.call(f"rm -rf {user_id}resultstmp",shell=True)
     else:
         sp.call(f"zip {user_id}results.zip *{user_id}*",shell=True)
     #sp.call(call,shell=True)
