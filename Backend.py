@@ -12,9 +12,6 @@ print(sys.argv)
 if sys.argv[2] == '' or sys.argv[3] == '' or "None" in sys.argv:
     print("No proteins found.")
     exit()
-#sp.call("sh -c '$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)'",shell=True)
-#sp.call("export PATH=${HOME}/edirect:${PATH}",shell=True)
-#sp.call("sh -c \"curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh\"")
 protein_ids=[]
 with open(f"{species}_{protein}_{user_id}pepresults.txt","w") as pepres:
     pepres.write("ID\tMolecularWeight\tResidueCount\tResidueWeight\tCharge\tIsoelectricPoint\tExtinctionReduced\tExtinctionBridges\tReducedMgMl\tBridgeMgMl\tProbability_pos_neg\n")
