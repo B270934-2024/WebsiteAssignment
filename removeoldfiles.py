@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 # Configuration
 TARGET_DIRECTORY = "/localdisk/home/s2761220/public_html/" 
 TARGET_EXTENSIONS = {'.zip', '.fasta', '.tsv', '.txt', '.png'}
-PROTECTED_STRING = '09d20e21531bf452'  # Case-sensitive match
+PROTECTED_STRING = 'ae16a9801cdd61a0'  # Case-sensitive match
 DAYS_OLD = 7
 
 def cleanup_old_files():
