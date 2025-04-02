@@ -25,6 +25,7 @@ with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","w") as proresults:
 #search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
 print(f"{user_id}")
 Entrez.email="s2761220@ed.ac.uk"
+time.sleep(3)
 search_handle = Entrez.esearch(db="protein", term=f"{species}[Organism] AND {protein}[Protein]", retmax=100)
 search_results = Entrez.read(search_handle)
 search_handle.close()
