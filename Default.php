@@ -210,9 +210,10 @@ try {
 echo <<<'D3_SCRIPT'
 <script>
 function renderDomains(data) {
-    const width = 800;
-    const height = 120;
-    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const containerWidth = document.querySelector('#domain-visualization').clientWidth;
+    const width = Math.min(1000, containerWidth - 40); // Max 1000px or container width minus padding
+    const height = 200;  // Increased height
+    const margin = { top: 30, right: 30, bottom: 40, left: 50 };
 
     // Clear container
     const container = d3.select("#domain-visualization");
@@ -220,84 +221,189 @@ function renderDomains(data) {
 
     if (!data.motifs || data.motifs.length === 0) {
         container.append("div")
-            .classed("alert alert-info", true)
-            .text("Search for a single protein to display this information");
+            .classed("alert alert-info text-center", true)
+            .text("Search for a single protein to display domain architecture");
         return;
     }
 
+    // Create centered wrapper
+    const wrapper = container.append("div")
+        .style("display", "flex")
+        .style("justify-content", "center")
+        .style("width", "100%");
+
     // Create SVG
-    const svg = container.append("svg")
+    const svg = wrapper.append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .style("background", "#f8f9fa")
+        .style("border-radius", "8px")
+        .style("box-shadow", "0 2px 8px rgba(0,0,0,0.1)");
 
     // Set up correct scaling
     const xScale = d3.scaleLinear()
-        .domain([0, data.length]) // Full protein length
+        .domain([0, data.length])
         .range([margin.left, width - margin.right]);
 
-    // Protein backbone
+    // Color scale for different motifs
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // Protein backbone (centered)
     svg.append("line")
         .attr("x1", margin.left)
         .attr("x2", width - margin.right)
         .attr("y1", height/2)
         .attr("y2", height/2)
-        .attr("stroke", "#666")
-        .attr("stroke-width", 2);
+        .attr("stroke", "#555")
+        .attr("stroke-width", 3)
+        .attr("stroke-linecap", "round");
 
     // Add domains
-    svg.selectAll(".domain-box")
+    const motifs = svg.selectAll(".domain-box")
         .data(data.motifs)
         .enter()
-        .append("rect")
+        .append("g")
+        .attr("class", "domain-group");
+
+    // Add colored boxes for motifs (larger)
+    motifs.append("rect")
         .attr("class", "domain-box")
         .attr("x", d => xScale(d.Start))
         .attr("width", d => xScale(d.End - d.Start))
-        .attr("y", height/2 - 15)
-        .attr("height", 30)
-        .attr("fill", "#4CAF50") // Solid green for visibility
-        .attr("rx", 4)
+        .attr("y", height/2 - 20)  // Increased height
+        .attr("height", 40)        // Increased height
+        .attr("fill", d => colorScale(d.Motif))
+        .attr("rx", 6)             // Rounder corners
+        .attr("stroke", "#333")
+        .attr("stroke-width", 1.5)
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("stroke", "#000").attr("stroke-width", 2);
-            showTooltip(d);
+            d3.select(this).attr("stroke", "#000").attr("stroke-width", 2.5);
+            showTooltip(d, event);
         })
         .on("mouseout", function() {
-            d3.select(this).attr("stroke", null);
+            d3.select(this).attr("stroke", "#333").attr("stroke-width", 1.5);
             hideTooltip();
         });
 
-    // Add axis
+    // Add text labels to motifs (improved visibility)
+    motifs.append("text")
+        .attr("class", "motif-label")
+        .attr("x", d => xScale(d.Start + (d.End - d.Start)/2))
+        .attr("y", height/2 + 7)
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .attr("font-size", "12px")
+        .attr("font-weight", "bold")
+        .attr("text-shadow", "1px 1px 2px rgba(0,0,0,0.7)")
+        .text(d => {
+            const boxWidth = xScale(d.End) - xScale(d.Start);
+            return boxWidth > 60 ? d.Motif : (boxWidth > 30 ? "..." : "");
+        });
+
+    // Add axis with better styling
     const xAxis = d3.axisBottom(xScale)
-        .ticks(5)
+        .ticks(Math.min(10, Math.floor(width/100)))
         .tickFormat(d => `${d} aa`);
 
     svg.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`)
-        .call(xAxis);
+        .attr("class", "axis")
+        .call(xAxis)
+        .selectAll("text")
+            .style("font-size", "12px");
+
+    // Add title
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", margin.top - 10)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("font-weight", "bold")
+        .text("Protein Domain Architecture");
+
+    // Create tooltip div
+    const tooltip = d3.select("body").append("div")
+        .attr("id", "motif-tooltip")
+        .style("position", "absolute")
+        .style("opacity", 0)
+        .style("background", "white")
+        .style("border", "1px solid #ddd")
+        .style("border-radius", "6px")
+        .style("padding", "10px")
+        .style("pointer-events", "none")
+        .style("box-shadow", "0 4px 8px rgba(0,0,0,0.15)")
+        .style("font-family", "sans-serif")
+        .style("font-size", "14px")
+        .style("max-width", "300px")
+        .style("z-index", "1000");
 
     // Tooltip functions
-    function showTooltip(d) {
-        d3.select("#tooltip")
+    function showTooltip(d, event) {
+        tooltip
             .style("opacity", 1)
-            .html(`<strong>${d.Motif}</strong><br>
-                   Position: ${d.Start}-${d.End}<br>
-                   Score: ${d.Score}<br>
-                   Strand: ${d.Strand}`)
-            .style("left", (event.pageX + 10) + "px")
-            .style("top", (event.pageY - 28) + "px");
+            .html(`
+                <div style="margin-bottom:5px;color:${colorScale(d.Motif)};font-weight:bold">${d.Motif}</div>
+                <div><strong>Position:</strong> ${d.Start}-${d.End}</div>
+                <div><strong>Length:</strong> ${d.End - d.Start + 1} aa</div>
+                <div><strong>Score:</strong> ${d.Score}</div>
+                <div><strong>Strand:</strong> ${d.Strand}</div>
+            `)
+            .style("left", (event.pageX + 20) + "px")
+            .style("top", (event.pageY - 30) + "px");
     }
 
     function hideTooltip() {
-        d3.select("#tooltip").style("opacity", 0);
+        tooltip.style("opacity", 0);
     }
 }
 
-// Initialize visualization
+// Initialize visualization when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     if(typeof domainData !== 'undefined') {
         renderDomains(domainData);
     }
+    
+    // Also handle window resize
+    window.addEventListener('resize', () => {
+        if(typeof domainData !== 'undefined') {
+            renderDomains(domainData);
+        }
+    });
 });
 </script>
+
+<style>
+    #domain-visualization {
+        width: 100%;
+        margin: 20px 0;
+        padding: 20px 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .domain-box {
+        transition: all 0.2s ease;
+    }
+    
+    .domain-box:hover {
+        stroke: #000 !important;
+        stroke-width: 2.5px !important;
+        filter: brightness(1.1);
+    }
+    
+    .motif-label {
+        pointer-events: none;
+        user-select: none;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #666;
+        shape-rendering: crispEdges;
+    }
+</style>
 D3_SCRIPT;
 
 echo "</div></body></content>";
