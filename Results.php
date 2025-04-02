@@ -46,7 +46,7 @@ echo <<<_HEAD
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="backendphp.php">ProteinExplorer</a>
+            <a class="navbar-brand" href="proteinexplorer.php">ProteinExplorer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -84,7 +84,7 @@ Alternatively, type 'MOTIF, or ALIGNMENT,' and your chosen sequence, to investig
         <button type='submit' class='btn btn-primary'>Search</button>
         </div></form>";
 	echo "<div class='d-grid gap-2'>
-                                <a href='backendphp.php' class='btn btn-outline-primary'>
+                                <a href='proteinexplorer.php' class='btn btn-outline-primary'>
                         <i class='bi bi-search me-2'></i>New Search
                     </a>
                                 <a href='{$user_id}results.zip' class='btn btn-outline-success'>

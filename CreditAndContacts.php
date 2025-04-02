@@ -40,7 +40,7 @@ try {
     <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="backendphp.php">ProteinExplorer</a>
+            <a class="navbar-brand" href="proteinexplorer.php">ProteinExplorer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -99,7 +99,7 @@ try {
    
     echo <<<_FOOTER
                 
-                <a href='backendphp.php' class='btn btn-outline-primary'>
+                <a href='proteinexplorer.php' class='btn btn-outline-primary'>
                         <i class="bi bi-search me-2"></i>New Search
                     </a>
             </div>
