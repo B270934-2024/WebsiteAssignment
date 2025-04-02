@@ -4,7 +4,6 @@ $username = "s2761220";
 $password = "!AEZZ)C1aezz0c";
 $email = "s2761220@ed.ac.uk";
 include 'functions.php';
-
 if(!isset($_COOKIE['user_id'])) {
     $unique_id = generateUUID();
     setcookie('user_id', $unique_id, time() + (86400 * 7), "/");
@@ -93,6 +92,14 @@ _HEAD;
             </div>
 _FORM;
         } else {
+        $file_pathpep = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}pepresults.txt";
+	      $file_pathali = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}alignment.fasta";
+	      $file_pathpro = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}resultsprosite.tsv";
+	      $file_pathtsv = $_POST['organism'] . "_" . $_POST['protein'] . "_" . "{$user_id}results.tsv";
+	      uploadtsv($file_pathtsv,$conn,"ts_table",["SeqName","Organism","Definition","Length"],$user_id);
+	      uploadtsv($file_pathpro,$conn,"pro_table",["SeqName",	"Start",	"End","Score",	"Strand",	"Motif"],$user_id);
+	      uploadtsv($file_pathpep,$conn,"pep_table",["SeqName",	"MolecularWeight",	"ResidueCount",	"ResidueWeight",	"Charge",	"IsoelectricPoint",	"ExtinctionReduced",	"ExtinctionBridges",	"ReducedMgMl",	"BridgeMgMl",	"Probability_pos_neg"],$user_id);
+	      uploadfasta($file_pathali,$conn,$user_id);
             echo <<<_SUCCESS
             <div class="sci-card mt-4">
                 <div class="sci-card-header bg-success text-white">
