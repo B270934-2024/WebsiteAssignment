@@ -5,10 +5,13 @@ import subprocess as sp
 from Bio import SeqIO
 from Bio import Entrez
 s=[]
+#Get our info from the php
 user_id = sys.argv[1] if len(sys.argv) > 1 else "None"
 species= sys.argv[2] if len(sys.argv) > 1 else "None"
 protein = sys.argv[3] if len(sys.argv) > 1 else "None"
 print(sys.argv)
+
+
 if sys.argv[2] == '' or sys.argv[3] == '' or "None" in sys.argv:
     print("No proteins found.")
     exit()
@@ -19,10 +22,8 @@ with open(f"{species}_{protein}_{user_id}results.fasta","w") as fasta:
     fasta.write("")
 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","w") as proresults:
     proresults.write("SeqName\tStart\tEnd\tScore\tStrand\tMotif\n")
-#PROSITE_URL = "https://prosite.expasy.org/cgi-bin/prosite/PSScan.cgi"
-#species=input("What organism group??\n")
-#protein=input("What protein or protein family?\n")
-#search=f"esearch -db protein -query \"\'{species}\'*[Organism] AND \'{protein}\'*[Protein]\"| efetch -format fasta >> {user_id}results.fasta"
+
+#Run the esearch function then efetch if we get results.
 print(f"{user_id}")
 Entrez.email="s2761220@ed.ac.uk"
 time.sleep(3)
@@ -55,7 +56,7 @@ if protein_ids:
         tsv_file.write("\n".join(tsv_lines))
 
     
-
+#Run some analysis
     sp.call(f"plotcon -sequences {species}_{protein}_{user_id}results.fasta -winsize 10 -graph png",shell=True)
     sp.call(f"cp plotcon.1.png {species}_{protein}_{user_id}.plotcon.png",shell=True)
     sp.call(f"pepstats {species}_{protein}_{user_id}results.fasta -outfile {species}_{protein}_{user_id}pepstats.txt",shell=True)
@@ -108,68 +109,26 @@ if protein_ids:
                 with open(f"{species}_{protein}_{user_id}resultsprosite.tsv","a") as result:
                     result.writelines(motifres)
                 os.remove(f"{user_id}{record.id}.tsv")
-
+                
             else:
                 print("no file")
                 os.remove(f"{user_id}{record.id}.tsv")
     os.remove(f"{user_id}tmp.fasta")
-        ##check this file, turn into tsv, count # of motifs. 
-
-        #print("done")
-        #with open("resultsprosite.tsv","a") as proresults:
-        #    for seqnum,record in enumerate(s):
-        #        print(f"processing {record.id}")
-        #        response = requests.post(PROSITE_URL, data={"seq":str(record.seq),"output": "json"})
-        #        time.sleep(1)
-        #        if response.status_code!=200:
-        #            print(f"Error: PROSITE request failed (Status {response.status_code})")
-        #            print("Response content:", response.text)  # Debug: Show error message
-        #        results=response.json()
-        #        matches=results.get("matchset",[])
-        #        if matches:
-        #            ascdesclist=[]
-         #           ascasclist=[match.get("signature_ac","Unknown") for match in matches]
-         #           ascasc="; ".join(ascasclist)
-         #           for ac in ascasclist:
-         #               response=requests.get(f"https://prosite.expasy.org/{ac}.txt")
-         #               if response.status_code == 200:
-         #                   for line in response.text.split("\n"):
-         #                       if line.startswith("DE   "):  # 'DE' line contains the description
-         #                         ascdesclist.append(line.replace("DE   ", "").strip())
-         #           ascdesc="; ".join(ascdesclist)
-         #       else:
-         #           ascasc="None"
-         #           ascdesc="None"
-                #proresults.write(f"{record.id}\t{ascasc}\t{ascdesc}\n")
-        #for seqnum,record in enumerate(s):
-            #sp.call(f"patmatmotifs -sformat raw -sprotein Y -sequence {record.seq} -outfile {record.id} -full -rformat excel",shell=True)
-            #print(f"done {seqnum}")
+        
     if len(protein_ids)<=100:
         sp.call(f"clustalo -i {species}_{protein}_{user_id}results.fasta -o {species}_{protein}_{user_id}alignment.fasta --force",shell=True)
     else:
         sp.call(f"mafft --quiet --auto {species}_{protein}_{user_id}results.fasta > {species}_{protein}_{user_id}alignment.fasta -v",shell=True)
-    #print(f"{user_id}")
-    #call=f"zip {user_id}results.zip ${user_id}*"
+    
+    #Zip up the user's files
     if os.path.exists(f"{user_id}results.zip"):
         sp.call(f"unzip -o {user_id}results.zip -d {user_id}resultstmp",shell=True)
         sp.call(f"cd {user_id}_temp && zip -r ../{user_id}results *{user_id}*", shell=True)
         sp.call(f"rm -rf {user_id}resultstmp",shell=True)
     else:
         sp.call(f"zip {user_id}results.zip *{user_id}*",shell=True)
-    #sp.call(call,shell=True)
+    
     print("ok")
-    #show sequences!
-    #too much greyscale + ipad design.
-    #instead of buttons have an overhead bar
-    #search to the right
-    #reset button on main page to reset
-    #default should be not grey
-    #bad = red 
-    #good = blue
-    #clear should show up red.
-    #first page could all be one column
-    #figma can help create figures for this.
-    #show sequences
     exit()
 else:
     print("No proteins found.")
