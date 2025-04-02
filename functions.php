@@ -108,18 +108,18 @@ WHERE p.SeqName IN ($IDlist) AND pr.user_id=?
     }
     echo "</tr></thead><tbody>";
     
-    foreach ($results as $row) {
-        echo "<tr>";
-        foreach ($row as $key => $cell) {
-            if ($key === 'Motifs') {
-                // Handle motifs with line breaks
-                echo "<td class='motif-cell'>" . nl2br(htmlspecialchars($cell)) . "</td>";
-            } else {
-                echo "<td>" . htmlspecialchars($cell) . "</td>";
-            }
+foreach ($results as $row) {
+    echo "<tr>";
+    foreach ($row as $key => $cell) {
+        $cellValue = (string)$cell; // Convert null to empty string
+        if ($key === 'Motifs') {
+            echo "<td class='motif-cell'>" . nl2br(htmlspecialchars($cellValue)) . "</td>";
+        } else {
+            echo "<td>" . htmlspecialchars($cellValue) . "</td>";
         }
-        echo "</tr>";
     }
+    echo "</tr>";
+}
     
     echo "</tbody></table></div>";
 }
@@ -215,6 +215,7 @@ function maketables($conn){
 	"CREATE TABLE IF NOT EXISTS ts_table(
 SeqName VARCHAR(255),
 Organism VARCHAR(255),
+Definition VARCHAR(255),
 Length INT,
 user_id VARCHAR(255))",
         "CREATE TABLE IF NOT EXISTS pro_table (
