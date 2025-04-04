@@ -25,8 +25,8 @@ $stmt = $conn->prepare("
     LEFT JOIN pro_table pr ON p.SeqName = pr.SeqName
     LEFT JOIN ts_table ts ON p.SeqName = ts.SeqName
     AND p.user_id = pr.user_id 
-    WHERE pr.user_id = ?
-    GROUP BY p.SeqName,  p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
+    WHERE pr.user_id = ? AND ts.Organism IS NOT NULL
+    GROUP BY p.SeqName, p.MolecularWeight,p.ResidueCount,p.IsoelectricPoint,p.Charge
 
 ");
         $stmt->execute([$user_id]);
