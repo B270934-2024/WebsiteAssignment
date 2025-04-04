@@ -78,6 +78,7 @@ try {
                             <li>StackOverflow community for coding assistance</li>
                             <li>EMBOSS tools developers</li>
                             <li>NCBI for their excellent database</li>
+                            <li>DeepSeek for help with styling choices</li>
                             <li>Al Iverns and coursemates for support</li>
                         </ul>
                     </div>
