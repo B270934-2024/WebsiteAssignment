@@ -70,7 +70,7 @@ try {
             <div class="sci-card-body">
                 <div class="credits-content">
                     <p>Thank you for using the Protein Explorer. The code used to create this site is available 
-                       <a href='https://github.com/B270934-2024/WebsiteAssignment' class="btn-bio">Here</a>.</p>
+                       here: <a href='https://github.com/B270934-2024/WebsiteAssignment' class="btn-bio">On Github</a>.</p>
                     
                     <div class="acknowledgments">
                         <h3>Acknowledgments</h3>
@@ -78,8 +78,8 @@ try {
                             <li>StackOverflow community for coding assistance</li>
                             <li>EMBOSS tools developers</li>
                             <li>NCBI for their excellent database</li>
-                            <li>DeepSeek for help with styling choices</li>
-                            <li>Al Iverns and coursemates for support</li>
+                            <li>DeepSeek for help with styling choices and bugfixing</li>
+                            <li>Al Iverns and coursemates for support, inspiration, and further help</li>
                         </ul>
                     </div>
                     
