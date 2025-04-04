@@ -69,7 +69,7 @@ try {
             </div>
             <div class="sci-card-body">
                 <div class="credits-content">
-                    <p>Thank you for using the Simple Protein Searcher. The code used to create this site is available 
+                    <p>Thank you for using the Protein Explorer. The code used to create this site is available 
                        <a href='https://github.com/B270934-2024/WebsiteAssignment' class="btn-bio">Here</a>.</p>
                     
                     <div class="acknowledgments">
