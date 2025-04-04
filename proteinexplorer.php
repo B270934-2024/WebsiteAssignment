@@ -59,8 +59,14 @@ try {
     <main class="container">
 _HEAD;
 
-    if(isset($_POST['organism']) && isset($_POST['protein']) && !empty($_POST['protein']) && !empty($_POST['organism'])) {
-        $command = escapeshellcmd("python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
+if(isset($_POST['organism']) && isset($_POST['protein']) && !empty($_POST['protein']) && !empty($_POST['organism'])) {
+        if (str_contains($_POST['organism'], ' ')) {
+   $_POST['organism']=str_replace(' ', '_', $_POST['organism']);
+	}
+	        if (str_contains($_POST['protein'], ' ')) {
+    $_POST['protein']=str_replace(' ', '_', $_POST['protein']);
+        }
+	$command = escapeshellcmd("python3 Backend.py " . escapeshellarg($user_id) . " " . escapeshellarg($_POST['organism']) . " " . escapeshellarg($_POST['protein']));
         $output = shell_exec($command);
 
         if (strpos($output,"No proteins found.")!==false) {
